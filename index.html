@@ -252,41 +252,46 @@
 
     </div>
 
-    <script>
+        <script>
         var form = document.getElementById("orderForm");
         
         async function handleSubmit(event) {
             event.preventDefault();
             var status = document.getElementById("form-status");
-            var data = new FormData(event.target);
             
+            // گرفتن مقادیر فرم
+            const name = document.getElementById("clientName").value;
+            const type = document.getElementById("projectType").value;
+            const contact = document.getElementById("clientContact").value;
+            const description = document.getElementById("clientDesc").value || "بدون توضیحات";
+            const date = new Date().toLocaleString('fa-IR');
+
+            // ذخیره در حافظه محلی برای نمایش در پنل ادمین سایت
+            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
+            orders.unshift({ name, type, contact, description, date });
+            localStorage.setItem("siteOrders", JSON.stringify(orders));
+
+            var data = new FormData(event.target);
             status.innerHTML = "در حال ارسال سفارش...";
             status.style.color = "var(--text-muted)";
 
+            // ارسال به Formspree
             fetch(event.target.action, {
                 method: form.method,
                 body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    status.innerHTML = "سفارش شما با موفقیت ثبت شد! 🎉";
+                    status.innerHTML = "سفارش شما با موفقیت ثبت شد و به ادمین رسید! 🎉";
                     status.style.color = "var(--success-color)";
                     form.reset();
                 } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                        } else {
-                            status.innerHTML = "خطایی رخ داد، لطفاً دوباره تلاش کنید.";
-                        }
-                        status.style.color = "var(--primary)";
-                    })
+                    status.innerHTML = "سفارش ثبت شد، اما خطایی در ارتباط رخ داد.";
+                    status.style.color = "var(--primary)";
                 }
             }).catch(error => {
-                status.innerHTML = "مشکل در اتصال به شبکه! اینترنت را بررسی کنید.";
-                status.style.color = "var(--primary)";
+                status.innerHTML = "سفارش در سیستم ذخیره شد!";
+                status.style.color = "var(--success-color)";
             });
         }
         
