@@ -197,14 +197,12 @@
             </div>
         </header>
 
-        <!-- بخش فرم ثبت سفارش با قابلیت ارسال به پنل -->
+        <!-- بخش فرم ثبت سفارش -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
             <p>اطلاعات خود را وارد کنید تا سفارش شما مستقیماً در سیستم ثبت و بررسی شود.</p>
             
-            <!-- به جای آدرس زیر، لینک اختصاصی Formspree خودت رو بذار -->
-            <form id="orderForm" action="<form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
-" method="POST">
+            <form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
                 <div class="form-group">
                     <label for="clientName">نام و نام خانوادگی:</label>
                     <input type="text" id="clientName" name="name" required placeholder="مثلاً علی رضایی">
@@ -254,7 +252,6 @@
 
     </div>
 
-    <!-- اسکریپت ارسال مدرن فرم بدون رفرش صفحه -->
     <script>
         var form = document.getElementById("orderForm");
         
@@ -263,6 +260,9 @@
             var status = document.getElementById("form-status");
             var data = new FormData(event.target);
             
+            status.innerHTML = "در حال ارسال سفارش...";
+            status.style.color = "var(--text-muted)";
+
             fetch(event.target.action, {
                 method: form.method,
                 body: data,
@@ -271,7 +271,7 @@
                 }
             }).then(response => {
                 if (response.ok) {
-                    status.innerHTML = "سفارش شما با موفقیت ثبت شد و به دست ما رسید! 🎉";
+                    status.innerHTML = "سفارش شما با موفقیت ثبت شد! 🎉";
                     status.style.color = "var(--success-color)";
                     form.reset();
                 } else {
@@ -279,13 +279,13 @@
                         if (Object.hasOwn(data, 'errors')) {
                             status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
                         } else {
-                            status.innerHTML = "خطایی در ثبت سفارش رخ داد، لطفاً دوباره تلاش کنید.";
+                            status.innerHTML = "خطایی رخ داد، لطفاً دوباره تلاش کنید.";
                         }
                         status.style.color = "var(--primary)";
                     })
                 }
             }).catch(error => {
-                status.innerHTML = "مشکل در اتصال به شبکه! لطفاً اینترنت خود را بررسی کنید.";
+                status.innerHTML = "مشکل در اتصال به شبکه! اینترنت را بررسی کنید.";
                 status.style.color = "var(--primary)";
             });
         }
