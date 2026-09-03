@@ -3,206 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استودیوی دیجیتال من</title>
+    <title>استودیوی طراحی دیجیتال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --primary-color: #8a2be2;
-            --primary-hover: #9c27b0;
-            --border-color: #333;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --border-color: #334155;
+            --success-color: #22c55e;
+            --input-bg: #0f172a;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --border-color: #cbd5e1;
+            --success-color: #16a34a;
+            --input-bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
-            font-family: Tahoma, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
+            color: var(--text-main);
+            line-height: 1.8;
             padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         header {
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-bg);
-            padding: 15px 25px;
-            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Lalezar', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            border-right: 4px solid var(--primary);
+            padding-right: 12px;
+        }
+
+        p, li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .auth-btn, .logout-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
         }
 
-        .auth-btn:hover, .logout-btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .user-dashboard-container {
-            background: var(--card-bg);
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            padding: 20px;
-            margin-top: 20px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.95rem;
         }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 15px;
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
         }
 
-        .section-card {
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ffffff;
+            background: var(--primary);
+            transition: all 0.3s;
+            font-family: 'Vazirmatn', sans-serif;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        #form-status {
             margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-title {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .admin-link-box {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .admin-link-box a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .admin-link-box a:hover {
+            color: var(--primary);
         }
 
         .orders-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .orders-table th, .orders-table td {
             padding: 12px;
             text-align: right;
             border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
 
         .orders-table th {
-            color: #b0b0b0;
-        }
-
-        /* مدال ساده ورود */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            width: 300px;
-        }
-        .modal-content input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: #252525;
-            border: 1px solid var(--border-color);
-            color: white;
-            border-radius: 6px;
+            color: var(--text-main);
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
-    <!-- هدر سایت -->
-    <header>
-        <h2>استودیوی دیجیتال</h2>
-        <div class="user-auth-section">
-            <button id="authBtn" class="auth-btn" onclick="toggleAuth()">👤 ورود / ثبت‌نام</button>
-        </div>
-    </header>
-
-    <!-- بخش اصلی سایت (می‌تونی بقیه محتوای سایتت رو اینجا بذاری) -->
-    <div class="section-card">
-        <h3>به استودیوی ما خوش آمدید!</h3>
-        <p>برای پیگیری سفارش‌ها و پروژه‌های خود، لطفاً وارد حساب کاربری خود شوید.</p>
-    </div>
-
-    <!-- داشبورد و لیست سفارش‌های کاربر (در ابتدا مخفی است تا کاربر لاگین کند) -->
-    <div id="userDashboard" class="user-dashboard-container" style="display: none;">
-        <div class="dashboard-header">
-            <h2>سلام، کاربر عزیز 👋</h2>
-            <button id="logoutBtn" class="logout-btn" onclick="logoutUser()">خروج از حساب</button>
-        </div>
+    <div class="container">
         
-        <div class="section-card">
-            <h3>سفارش‌های من</h3>
-            <p>در این بخش می‌توانید لیست و وضعیت پروژه‌های ثبت‌شده خود را مشاهده کنید.</p>
+        <!-- هدر سایت -->
+        <header>
+            <div class="logo">استودیوی دیجیتال 🚀</div>
+            <div class="nav-links">
+                <a href="index.html">صفحه اصلی</a>
+                <a href="admin.html">مدیریت</a>
+                <!-- دکمه تغییر تم -->
+                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </header>
+
+        <!-- بخش فرم ثبت سفارش -->
+        <section class="card">
+            <h2>ثبت سفارش پروژه</h2>
+            <p>اطلاعات خود را وارد کنید تا سفارش شما مستقیماً در سیستم ثبت و بررسی شود.</p>
+            <br>
             
-            <div class="table-responsive">
+            <form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
+                <div class="form-group">
+                    <label for="clientName">نام و نام خانوادگی:</label>
+                    <input type="text" id="clientName" name="name" required placeholder="مثلاً علی رضایی">
+                </div>
+
+                <div class="form-group">
+                    <label for="projectType">نوع پروژه:</label>
+                    <select id="projectType" name="project_type">
+                        <option value="طراحی وب‌سایت">طراحی وب‌سایت</option>
+                        <option value="گرافیک و فتوشاپ">گرافیک و فتوشاپ</option>
+                        <option value="سایر خدمات دیجیتال">سایر خدمات دیجیتال</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientContact">آیدی یا شماره تماس شما:</label>
+                    <input type="text" id="clientContact" name="contact" required placeholder="مثلاً @username یا شماره تماس">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientDesc">توضیحات پروژه:</label>
+                    <textarea id="clientDesc" name="description" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
+                </div>
+
+                <button type="submit" class="btn" id="submit-btn">ثبت نهایی سفارش</button>
+                <div id="form-status"></div>
+            </form>
+        </section>
+
+        <!-- بخش داشبورد و سفارش‌های کاربر -->
+        <section class="card">
+            <h2>سفارش‌های من</h2>
+            <p>در این بخش می‌توانید لیست و وضعیت پروژه‌های ثبت‌شده خود را مشاهده کنید.</p>
+            <div style="overflow-x: auto;">
                 <table class="orders-table">
                     <thead>
                         <tr>
-                            <th>شماره سفارش</th>
+                            <th>شماره</th>
                             <th>نوع پروژه</th>
                             <th>تاریخ ثبت</th>
                             <th>وضعیت</th>
                         </tr>
                     </thead>
                     <tbody id="userOrdersTableBody">
-                        <!-- نمونه داده تستی؛ بعداً با localStorage مچ میشه -->
+                        <!-- سفارش‌ها به صورت خودکار اینجا لود میشن -->
                         <tr>
                             <td>#1042</td>
                             <td>طراحی وب‌سایت اختصاصی</td>
-                            <td>1405/06/12</td>
-                            <td><span style="color: #4caf50;">تکمیل شده</span></td>
-                        </tr>
-                        <tr>
-                            <td>#1038</td>
-                            <td>طراحی گرافیک و فتوشاپ</td>
-                            <td>1405/06/05</td>
-                            <td><span style="color: #ff9800;">در انتظار بررسی</span></td>
+                            <td>۱۴۰۵/۰۶/۱۲</td>
+                            <td><span style="color: var(--success-color); font-weight: 700;">تکمیل شده</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- مودال ورود ساده -->
-    <div id="authModal" class="modal">
-        <div class="modal-content">
-            <h3>ورود به حساب کاربری</h3>
-            <input type="text" id="usernameInput" placeholder="نام کاربری یا ایمیل">
-            <button class="auth-btn" style="width: 100%; margin-top: 10px;" onclick="loginUser()">تایید و ورود</button>
-            <p style="font-size: 12px; cursor: pointer; color: #888; margin-top: 15px;" onclick="toggleAuth()">بستن</p>
+        <!-- بخش سوالات متداول -->
+        <section class="card">
+            <h2>سوالات متداول</h2>
+            <div class="faq-item">
+                <div class="faq-title">چقدر طول می‌کشد تا پروژه آماده شود؟</div>
+                <p>زمان تحویل بسته به حجم و نوع پروژه متغیر است، اما عموماً بین ۳ تا ۷ روز کاری زمان می‌برد.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-title">شرایط پرداخت به چه صورت است؟</div>
+                <p>جهت امنیت پروژه و شروع کار، مبلغی به عنوان پیش‌پرداخت دریافت می‌گردد و مابقی پس از تأیید نهایی تسویه می‌شود.</p>
+            </div>
+        </section>
+
+        <!-- لینک پنل مدیریت -->
+        <div class="admin-link-box">
+            <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
+
     </div>
 
     <script>
-        // توابع ساده برای تست باز و بسته شدن داشبورد و لاگین
-        function toggleAuth() {
-            const modal = document.getElementById('authModal');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        // مدیریت تم تاریک و روشن
+        const currentTheme = localStorage.getItem("siteTheme") || "dark";
+        if (currentTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+            document.getElementById("themeToggle").innerHTML = "☀️";
         }
 
-        function loginUser() {
-            // شبیه‌سازی لاگین موفق
-            document.getElementById('authModal').style.display = 'none';
-            document.getElementById('authBtn').style.display = 'none';
-            document.getElementById('userDashboard').style.display = 'block';
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute("data-theme");
+            const toggleBtn = document.getElementById("themeToggle");
+            
+            if (current === "light") {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("siteTheme", "dark");
+                toggleBtn.innerHTML = "🌙";
+            } else {
+                document.documentElement.setAttribute("data-theme", "light");
+                localStorage.setItem("siteTheme", "light");
+                toggleBtn.innerHTML = "☀️";
+            }
         }
 
-        function logoutUser() {
-            // خروج از حساب
-            document.getElementById('userDashboard').style.display = 'none';
-            document.getElementById('authBtn').style.display = 'inline-block';
+        // ارسال فرم و ذخیره در پنل مدیریت
+        var form = document.getElementById("orderForm");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("form-status");
+            
+            const name = document.getElementById("clientName").value;
+            const type = document.getElementById("projectType").value;
+            const contact = document.getElementById("clientContact").value;
+            const description = document.getElementById("clientDesc").value || "بدون توضیحات";
+            
+            // تولید تاریخ شمسی دقیق
+            const date = new Date().toLocaleDateString('fa-IR', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+
+            // ذخیره در حافظه محلی برای پنل ادمین
+            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
+            orders.unshift({ name, type, contact, description, date });
+            localStorage.setItem("siteOrders", JSON.stringify(orders));
+
+            var data = new FormData(event.target);
+            status.innerHTML = "در حال ارسال سفارش...";
+            status.style.color = "var(--text-muted)";
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    status.innerHTML = "سفارش شما با موفقیت ثبت شد! 🎉";
+                    status.style.color = "var(--success-color)";
+                    form.reset();
+                } else {
+                    status.innerHTML = "سفارش ثبت شد، اما خطایی در ارتباط با سرور رخ داد.";
+                    status.style.color = "var(--primary)";
+                }
+            }).catch(error => {
+                status.innerHTML = "سفارش با موفقیت در سیستم ثبت شد!";
+                status.style.color = "var(--success-color)";
+            });
         }
+        
+        form.addEventListener("submit", handleSubmit);
     </script>
 
 </body>
