@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل مدیریت | استودیوی طراحی دیجیتال</title>
+    <title>پنل مدیریت سفارشات</title>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #f1f5f9;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --border-color: #334155;
+            --success-color: #22c55e;
         }
 
         * {
@@ -25,113 +30,164 @@
             color: var(--text-main);
             line-height: 1.8;
             padding: 20px;
-            display: none; /* تا زمان تایید رمز، صفحه مخفی است */
         }
 
         .container {
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .admin-nav {
-            background: #ffffff;
-            padding: 15px 25px;
-            border-radius: 18px;
+        header {
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
         }
 
-        .admin-title {
+        .logo {
             font-family: 'Lalezar', cursive;
-            font-size: 1.6rem;
-            color: #dc2626;
+            font-size: 2rem;
+            color: var(--primary);
+            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
         }
 
-        .logout-btn {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 8px 16px;
-            border-radius: 10px;
+        .nav-links a {
             text-decoration: none;
+            color: var(--text-main);
+            margin-right: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
-        .logout-btn:hover {
-            background: #fecaca;
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
         .card {
-            background: #ffffff;
-            padding: 25px;
+            background: var(--card-bg);
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
 
         h2 {
             font-family: 'Lalezar', cursive;
             font-size: 1.8rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--text-main);
-            border-right: 4px solid #dc2626;
-            padding-right: 10px;
+            border-right: 4px solid var(--primary);
+            padding-right: 12px;
         }
 
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .admin-table th, .admin-table td {
-            padding: 12px 15px;
-            text-align: right;
-            border-bottom: 1px solid #e2e8f0;
+        p {
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
-        .admin-table th {
-            background: #f8fafc;
+        /* استایل فرم ورود رمز ادمین */
+        #login-section {
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: #0f172a;
             color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .status-select {
-            padding: 6px 10px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            background: #f8fafc;
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.85rem;
-            cursor: pointer;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
-        .status-select:focus {
+        .admin-input:focus {
             outline: none;
-            border-color: #dc2626;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ffffff;
+            background: var(--primary);
+            transition: all 0.3s;
+            font-family: 'Vazirmatn', sans-serif;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* استایل کارت‌های سفارش در پنل ادمین */
+        .order-card {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .order-card h3 {
+            color: var(--text-main);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .order-card p {
+            margin-bottom: 5px;
+        }
+
+        .order-date {
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: inline-block;
         }
 
         .delete-btn {
-            background: #fee2e2;
-            color: #dc2626;
-            border: none;
-            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
             font-size: 0.85rem;
-            transition: background 0.3s;
+            margin-top: 10px;
+            transition: all 0.3s;
         }
 
         .delete-btn:hover {
-            background: #fecaca;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        #admin-panel {
+            display: none;
+        }
+
+        .error-msg {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -139,74 +195,84 @@
 
     <div class="container">
         
-        <nav class="admin-nav">
-            <div class="admin-title">پنل مدیریت استودیو 🛠️</div>
-            <a href="index.html" class="logout-btn">خروج به سایت</a>
-        </nav>
-
-        <section class="card">
-            <h2>مدیریت سفارش‌های مشتریان</h2>
-            <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.95rem;">در این جدول می‌توانید سفارش‌های ثبت‌شده توسط کاربران را بررسی و وضعیت‌شان را بروزرسانی کنید.</p>
-            
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>کد</th>
-                            <th>نام مشتری</th>
-                            <th>نوع پروژه</th>
-                            <th>توضیحات / راه ارتباطی</th>
-                            <th>وضعیت</th>
-                            <th>عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1042</td>
-                            <td>علی رضایی</td>
-                            <td>طراحی وب‌سایت</td>
-                            <td>آیدی روبیکا: @ali_web <br><small style="color: var(--text-muted);">طراحی صفحه لندینگ اختصاصی</small></td>
-                            <td>
-                                <select class="status-select">
-                                    <option value="pending" selected>در انتظار بررسی</option>
-                                    <option value="doing">در حال طراحی</option>
-                                    <option value="done">تکمیل شده</option>
-                                </select>
-                            </td>
-                            <td><button class="delete-btn">حذف</button></td>
-                        </tr>
-                        <tr>
-                            <td>#1038</td>
-                            <td>سارا محمدی</td>
-                            <td>گرافیک و فتوشاپ</td>
-                            <td>شماره تماس: 0912... <br><small style="color: var(--text-muted);">بنر تبلیغاتی اینستاگرام</small></td>
-                            <td>
-                                <select class="status-select">
-                                    <option value="pending">در انتظار بررسی</option>
-                                    <option value="doing">در حال طراحی</option>
-                                    <option value="done" selected>تکمیل شده</option>
-                                </select>
-                            </td>
-                            <td><button class="delete-btn">حذف</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- هدر سایت -->
+        <header>
+            <div class="logo">مدیریت سفارشات 🔒</div>
+            <div class="nav-links">
+                <a href="index.html">بازگشت به سایت</a>
             </div>
-        </section>
+        </header>
+
+        <!-- بخش اول: ورود رمز عبور -->
+        <div id="login-section" class="card">
+            <h2>ورود ادمین</h2>
+            <p>لطفاً رمز عبور پنل مدیریت را وارد کنید.</p>
+            <br>
+            <input type="password" id="adminPassword" class="admin-input" placeholder="رمز عبور...">
+            <button onclick="checkPassword()" class="btn">ورود به پنل</button>
+            <div id="loginError" class="error-msg"></div>
+        </div>
+
+        <!-- بخش دوم: نمایش لیست سفارش‌ها (بعد از ورود رمز نمایش داده می‌شود) -->
+        <div id="admin-panel">
+            <div class="card">
+                <h2>لیست سفارش‌های ثبت شده</h2>
+                <p>در این قسمت می‌توانید سفارش‌های جدید کاربران را مشاهده کنید.</p>
+                <br>
+                <div id="ordersList">
+                    <!-- سفارش‌ها به صورت دینامیک اینجا قرار می‌گیرند -->
+                </div>
+            </div>
+        </div>
 
     </div>
 
     <script>
-        // بررسی رمز عبور هنگام ورود به صفحه ادمین
-        const password = prompt("لطفاً رمز عبور پنل مدیریت را وارد کنید:");
-        
-        if (password === "soloway2025#") {
-            // اگر رمز درست بود، صفحه نمایش داده میشه
-            document.body.style.display = "block";
-        } else {
-            // اگر رمز اشتباه بود یا لغو زد، کاربر رو برمی‌گردونه به صفحه اصلی
-            alert("رمز عبور اشتباه است!");
-            window.location.href = "index.html";
+        // رمز عبور پنل مدیریت
+        const CORRECT_PASSWORD = "soloway2025#";
+
+        function checkPassword() {
+            const passInput = document.getElementById("adminPassword").value;
+            const errorDiv = document.getElementById("loginError");
+
+            if (passInput === CORRECT_PASSWORD) {
+                document.getElementById("login-section").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+                loadOrders();
+            } else {
+                errorDiv.innerHTML = "رمز عبور اشتباه است!";
+            }
+        }
+
+        function loadOrders() {
+            const ordersList = document.getElementById("ordersList");
+            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
+
+            if (orders.length === 0) {
+                ordersList.innerHTML = "<p>هنوز سفارشی ثبت نشده است.</p>";
+                return;
+            }
+
+            ordersList.innerHTML = "";
+            orders.forEach((order, index) => {
+                ordersList.innerHTML += `
+                    <div class="order-card">
+                        <span class="order-date">📅 ${order.date}</span>
+                        <h3>👤 نام: ${order.name}</h3>
+                        <p><strong>🛠 نوع پروژه:</strong> ${order.type}</p>
+                        <p><strong>📞 راه ارتباطی:</strong> ${order.contact}</p>
+                        <p><strong>📝 توضیحات:</strong> ${order.description}</p>
+                        <button class="delete-btn" onclick="deleteOrder(${index})">حذف سفارش</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteOrder(index) {
+            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
+            orders.splice(index, 1);
+            localStorage.setItem("siteOrders", JSON.stringify(orders));
+            loadOrders();
         }
     </script>
 
