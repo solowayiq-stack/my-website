@@ -33,7 +33,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -79,16 +79,15 @@
 
         h2 {
             font-family: 'Lalezar', cursive;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 15px;
             color: var(--text-main);
             border-right: 4px solid var(--primary);
             padding-right: 10px;
         }
 
-        p {
+        p, li {
             color: #64748b;
-            margin-bottom: 20px;
             font-size: 0.95rem;
         }
 
@@ -166,9 +165,23 @@
             background: var(--rubika-hover);
         }
 
+        /* استایل بخش سوالات متداول و خدمات */
+        .faq-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .faq-title {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
         .admin-link-box {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
 
         .admin-link-box a {
@@ -195,7 +208,7 @@
             </div>
         </header>
 
-        <!-- بخش فرم ثبت سفارش -->
+        <!-- بخش معرفی و فرم ثبت سفارش -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
             <p>اطلاعات خود را وارد کنید و روی پیام‌رسان دلخواه جهت ارسال سفارش کلیک کنید.</p>
@@ -237,37 +250,57 @@
             </form>
         </section>
 
+        <!-- بخش سوالات متداول -->
+        <section class="card">
+            <h2>سوالات متداول</h2>
+            
+            <div class="faq-item">
+                <div class="faq-title">چقدر طول می‌کشد تا پروژه آماده شود؟</div>
+                <p>زمان تحویل بسته به حجم و نوع پروژه متغیر است، اما عموماً بین ۳ تا ۷ روز کاری زمان می‌برد.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-title">چطور می‌توانم به شما اعتماد کنم؟</div>
+                <p>ما تمامی پروژه‌ها را با شفافیت کامل پیش می‌بریم و راه ارتباطی مستقیم همیشه برقرار است.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-title">نحوه پرداخت هزینه‌ها به چه صورت است؟</div>
+                <p>مراحل پرداخت طی توافق اولیه و پیش از شروع به کار پروژه مشخص و هماهنگ می‌گردد.</p>
+            </div>
+        </section>
+
+        <!-- لینک پنل مدیریت -->
         <div class="admin-link-box">
             <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
 
     </div>
 
+    <!-- اسکریپت ارسال سفارش به تلگرام و روبیکا -->
     <script>
         function sendOrder(platform) {
-            // گرفتن مقادیر فرم
             const name = document.getElementById('clientName').value;
             const type = document.getElementById('projectType').value;
             const contact = document.getElementById('clientContact').value;
             const desc = document.getElementById('clientDesc').value || 'بدون توضیحات';
 
-            // بررسی پر بودن فیلدهای مهم
             if (!name || !contact) {
                 alert('لطفاً نام و راه ارتباطی خود را وارد کنید!');
                 return;
             }
 
-            // ساخت متن پیام آماده
+            // متن پیام ارسالی به شما
             const message = `سلام، سفارش جدید دارم!%0A👤 نام: ${name}%0A🛠 پروژه: ${type}%0A📞 راه ارتباطی: ${contact}%0A📝 توضیحات: ${desc}`;
 
-            // تنظیمات آیدی‌های خودت (اینجا رو با آیدی خودت جایگزین کن)
-            const telegramId = "@WreCKers_ir"; // مثال: alirezayi
-            const rubikaId = "@Wild_Sniper"; // آیدی یا شماره روبیکا
+            // آیدی‌های شما
+            const telegramId = "WreCKers_ir";
+            const rubikaId = "Wild_Sniper";
 
             if (platform === 'telegram') {
                 window.location.href = `https://t.me/${telegramId}?text=${message}`;
             } else if (platform === 'rubika') {
-                // لینک هدایت به روبیکا (یا پروفایل/پی‌وی)
+                // هدایت به روبیکا همراه با آیدی شما
                 window.location.href = `https://rubika.ir/${rubikaId}`;
             }
         }
