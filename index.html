@@ -209,6 +209,7 @@
 
     <div class="container">
         
+        <!-- هدر سایت -->
         <header>
             <div class="logo">استودیوی دیجیتال 🚀</div>
             <div class="nav-links">
@@ -217,6 +218,7 @@
             </div>
         </header>
 
+        <!-- بخش فرم ثبت سفارش -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
             <p>اطلاعات خود را وارد کنید و روی پیام‌رسان دلخواه جهت ارسال سفارش کلیک کنید.</p>
@@ -246,6 +248,7 @@
                     <textarea id="clientDesc" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
                 </div>
 
+                <!-- دکمه‌های ارسال به تلگرام و روبیکا -->
                 <div class="buttons-container">
                     <button type="button" class="btn telegram-btn" onclick="sendOrder('telegram')">
                         <span>✈️</span> ارسال با تلگرام
@@ -257,6 +260,7 @@
             </form>
         </section>
 
+        <!-- بخش سوالات متداول -->
         <section class="card">
             <h2>سوالات متداول</h2>
             
@@ -276,12 +280,14 @@
             </div>
         </section>
 
+        <!-- لینک پنل مدیریت -->
         <div class="admin-link-box">
             <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
 
     </div>
 
+    <!-- اسکریپت ارسال سفارش به تلگرام و روبیکا -->
     <script>
         function sendOrder(platform) {
             const name = document.getElementById('clientName').value;
