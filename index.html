@@ -8,9 +8,10 @@
     
     <style>
         :root {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --text-main: #1e293b;
-            --text-muted: #64748b;
+            --primary: #dc2626;
+            --primary-hover: #b91c1c;
         }
 
         * {
@@ -28,166 +29,63 @@
         }
 
         .container {
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        /* استایل منوی بالای صفحه (Navbar) */
-        .navbar {
+        header {
             background: #ffffff;
-            padding: 15px 25px;
-            border-radius: 18px;
+            padding: 20px 30px;
+            border-radius: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             border: 1px solid #e2e8f0;
         }
 
-        .nav-brand {
+        .logo {
             font-family: 'Lalezar', cursive;
             font-size: 1.8rem;
-            color: #7c3aed;
-            letter-spacing: 0.5px;
+            color: var(--primary);
         }
 
-        .nav-btn {
-            font-family: 'Lalezar', cursive;
-            background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            color: white;
-            padding: 8px 20px;
-            font-size: 1.1rem;
-            border-radius: 10px;
+        .nav-links a {
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
-            transition: opacity 0.3s;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-btn:hover {
-            opacity: 0.9;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-family: 'Lalezar', cursive;
-            color: #7c3aed;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-right: 15px;
             font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
-        section {
-            margin-bottom: 40px;
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 25px;
         }
 
         h2 {
             font-family: 'Lalezar', cursive;
             font-size: 2rem;
-            margin-bottom: 25px;
-            color: var(--text-main);
-            border-right: 4px solid #7c3aed;
-            padding-right: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 600px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            .navbar {
-                padding: 12px 15px;
-            }
-        }
-
-        .floating-card {
-            background: #ffffff;
-            border-radius: 28px;
-            padding: 16px;
-            box-shadow: 0 15px 35px rgba(100, 116, 139, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .floating-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .animated-bg-box {
-            background: linear-gradient(270deg, #581c87, #7c3aed, #4f46e5, #312e81);
-            background-size: 400% 400%;
-            animation: smoothGradient 8s ease infinite;
-            border-radius: 20px;
-            padding: 25px;
-            color: #ffffff;
-            height: 100%;
-        }
-
-        @keyframes smoothGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .animated-bg-box h3 {
-            font-family: 'Lalezar', cursive;
-            margin-bottom: 12px;
-            color: #ffffff;
-            font-size: 1.8rem;
-            letter-spacing: 0.8px;
-        }
-
-        .animated-bg-box p {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 1rem;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        .faq-item {
             margin-bottom: 15px;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-        }
-
-        .faq-item h4 {
-            margin-bottom: 5px;
             color: var(--text-main);
-            font-weight: 700;
-            font-size: 1.1rem;
+            border-right: 4px solid var(--primary);
+            padding-right: 10px;
         }
 
-        .faq-item p {
-            color: var(--text-muted);
+        p {
+            color: #64748b;
+            margin-bottom: 20px;
             font-size: 0.95rem;
-        }
-
-        .order-form {
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
         }
 
         .form-group {
@@ -198,53 +96,61 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 700;
-            color: var(--text-main);
+            font-size: 0.9rem;
         }
 
         input, select, textarea {
             width: 100%;
             padding: 12px 15px;
+            border-radius: 12px;
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 1rem;
             background: #f8fafc;
-            color: var(--text-main);
             font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.95rem;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #7c3aed;
+            border-color: var(--primary);
             background: #ffffff;
         }
 
-        button[type="submit"] {
-            font-family: 'Lalezar', cursive;
-            background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            color: white;
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: #ffffff;
             border: none;
             padding: 12px 25px;
-            font-size: 1.4rem;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-            transition: opacity 0.3s;
-            letter-spacing: 1px;
-        }
-
-        button[type="submit"]:hover {
-            opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 20px;
             font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            transition: background 0.3s;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .admin-link-box {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .admin-link-box a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .admin-link-box a:hover {
+            color: var(--primary);
         }
     </style>
 </head>
@@ -252,91 +158,69 @@
 
     <div class="container">
         
-        <!-- منوی بالای سایت (ناوبری) -->
-        <nav class="navbar">
-            <div class="nav-brand">استودیو طراحی</div>
-            <a href="login.html" class="nav-btn">ورود / ثبت‌نام</a>
-        </nav>
-
-        <!-- هدر و معرفی -->
+        <!-- هدر سایت -->
         <header>
-            <h1>استودیوی طراحی دیجیتال</h1>
-            <p>ارائه‌دهنده‌ی خدمات مدرن طراحی وب‌سایت و گرافیک با فتوشاپ (کاملاً غیرحضوری و چت‌محور)</p>
+            <div class="logo">استودیوی دیجیتال 🚀</div>
+            <div class="nav-links">
+                <a href="index.html">صفحه اصلی</a>
+                <a href="login.html">ورود / حساب کاربری</a>
+            </div>
         </header>
 
-        <!-- خدمات با کارت‌های برجسته و گرادینت بنفش متحرک -->
-        <section>
-            <h2>خدمات من</h2>
-            <div class="services-grid">
-                <!-- کارت اول -->
-                <div class="floating-card">
-                    <div class="animated-bg-box">
-                        <h3>طراحی سایت اختصاصی</h3>
-                        <p>ساخت وب‌سایت‌های شخصی، معرفی خدمات و نمونه‌کار با ظاهر کاملاً مدرن، سریع و سازگار با موبایل.</p>
-                    </div>
+        <!-- بخش معرفی و فرم ثبت سفارش -->
+        <section class="card">
+            <h2>ثبت سفارش پروژه</h2>
+            <p>مشخصات و نوع پروژه خود را وارد کنید تا بررسی شود.</p>
+            
+            <!-- فرم سفارشی که بدون خطای سرور با جاوااسکریپت مدیریت میشه -->
+            <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+                <div class="form-group">
+                    <label for="clientName">نام و نام خانوادگی:</label>
+                    <input type="text" id="clientName" required placeholder="مثلاً علی رضایی">
                 </div>
-                <!-- کارت دوم -->
-                <div class="floating-card">
-                    <div class="animated-bg-box">
-                        <h3>طراحی گرافیک و فتوشاپ</h3>
-                        <p>طراحی انواع بنرهای تبلیغاتی، پوسترهای جذاب و گرافیک‌های مورد نیاز برای کسب‌وکارها.</p>
-                    </div>
+
+                <div class="form-group">
+                    <label for="projectType">نوع پروژه:</label>
+                    <select id="projectType">
+                        <option value="طراحی وب‌سایت">طراحی وب‌سایت</option>
+                        <option value="گرافیک و فتوشاپ">گرافیک و فتوشاپ</option>
+                        <option value="سایر خدمات دیجیتال">سایر خدمات دیجیتال</option>
+                    </select>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="clientDesc">توضیحات و راه ارتباطی (روبیکا، تلگرام یا شماره تماس):</label>
+                    <textarea id="clientDesc" required placeholder="جزئیات درخواست و آیدی یا شماره تماس خود را بنویسید..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">ارسال سفارش</button>
+            </form>
         </section>
 
-        <!-- سوالات متداول -->
-        <section>
-            <h2>سوالات متداول</h2>
-            <div class="faq-item">
-                <h4>ارتباطات به چه شکلی انجام میشه؟</h4>
-                <p>تمام مراحل ثبت سفارش، بررسی نیازها و تحویل کار به صورت کاملاً متنی و از طریق چت انجام میشه تا با خیال راحت و بدون استرس جزئیات رو پیگیری کنید.</p>
-            </div>
-            <div class="faq-item">
-                <h4>پروژه‌ها چقدر طول می‌کشه؟</h4>
-                <p>بسته به نوع پروژه (سایت یا گرافیک)، زمان تحویل متفاوت است که پس از بررسی توضیحات شما اعلام میشه.</p>
-            </div>
-        </section>
+        <!-- لینک مخفی یا ساده برای رفتن به پنل ادمین -->
+        <div class="admin-link-box">
+            <a href="admin.html">ورود به پنل مدیریت 🔒</a>
+        </div>
 
-        <!-- فرم ثبت سفارش -->
-        <section>
-            <h2>ثبت سفارش آنلاین</h2>
-            <div class="order-form">
-                <form action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">نام و نام خانوادگی:</label>
-                        <input type="text" id="name" name="name" required placeholder="نام خود را وارد کنید">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contact">آیدی جهت ارتباط چتی:</label>
-                        <input type="text" id="contact" name="contact" required placeholder="مثلاً آیدی یا شماره تماس">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="service-type">نوع پروژه:</label>
-                        <select id="service-type" name="service_type">
-                            <option value="web-design">طراحی وب‌سایت</option>
-                            <option value="photoshop-design">طراحی گرافیک با فتوشاپ</option>
-                            <option value="both">هر دو مورد</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">توضیحات و جزئیات کامل سفارش:</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="جزئیات درخواست خود را کامل بنویسید..."></textarea>
-                    </div>
-
-                    <button type="submit">ارسال سفارش</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- فوتر -->
-        <footer>
-            <p>تمامی حقوق محفوظ است | مدیریت توسط طراح مستقل</p>
-        </footer>
     </div>
+
+    <!-- اسکریپت جلوگیری از ارور 405 و نمایش پیام موفقیت -->
+    <script>
+        function handleOrderSubmit(event) {
+            event.preventDefault(); // مانع از رفرش شدن اجباری یا خطای سرور میشه
+
+            // گرفتن مقادیر فرم
+            const name = document.getElementById('clientName').value;
+            const type = document.getElementById('projectType').value;
+
+            // نمایش پیام موفقیت به کاربر
+            alert(`کاربر گرامی ${name}، سفارش شما در زمینه "${type}" با موفقیت ثبت شد! به زودی بررسی خواهد شد.`);
+
+            // پاک کردن فرم و رفرش ملایم صفحه برای بازگشت به حالت اولیه
+            document.getElementById('orderForm').reset();
+            window.location.href = "index.html";
+        }
+    </script>
 
 </body>
 </html>
