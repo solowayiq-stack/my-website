@@ -16,6 +16,19 @@
             --primary-hover: #dc2626;
             --border-color: #334155;
             --success-color: #22c55e;
+            --input-bg: #0f172a;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --border-color: #cbd5e1;
+            --success-color: #16a34a;
+            --input-bg: #f8fafc;
         }
 
         * {
@@ -23,6 +36,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -45,7 +59,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
         }
 
@@ -53,13 +67,18 @@
             font-family: 'Lalezar', cursive;
             font-size: 2rem;
             color: var(--primary);
-            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-main);
-            margin-right: 20px;
             font-weight: 700;
             font-size: 0.95rem;
             transition: color 0.3s;
@@ -69,11 +88,26 @@
             color: var(--primary);
         }
 
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--primary);
+        }
+
         .card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
@@ -92,7 +126,6 @@
             font-size: 0.95rem;
         }
 
-        /* استایل فرم ورود رمز ادمین */
         #login-section {
             max-width: 400px;
             margin: 50px auto;
@@ -104,7 +137,7 @@
             padding: 12px 15px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            background: #0f172a;
+            background: var(--input-bg);
             color: var(--text-main);
             font-family: 'Vazirmatn', sans-serif;
             font-size: 0.95rem;
@@ -136,14 +169,12 @@
             background: var(--primary-hover);
         }
 
-        /* استایل کارت‌های سفارش در پنل ادمین */
         .order-card {
-            background: #0f172a;
+            background: var(--input-bg);
             border: 1px solid var(--border-color);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 15px;
-            position: relative;
         }
 
         .order-card h3 {
@@ -157,22 +188,24 @@
         }
 
         .order-date {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--primary);
             margin-bottom: 10px;
             display: inline-block;
+            font-weight: 700;
         }
 
         .delete-btn {
             background: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.85rem;
             margin-top: 10px;
             transition: all 0.3s;
+            font-family: 'Vazirmatn', sans-serif;
         }
 
         .delete-btn:hover {
@@ -188,6 +221,7 @@
             color: var(--primary);
             font-size: 0.9rem;
             margin-top: 10px;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -195,15 +229,16 @@
 
     <div class="container">
         
-        <!-- هدر سایت -->
+        <!-- هدر پنل -->
         <header>
             <div class="logo">مدیریت سفارشات 🔒</div>
             <div class="nav-links">
                 <a href="index.html">بازگشت به سایت</a>
+                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
             </div>
         </header>
 
-        <!-- بخش اول: ورود رمز عبور -->
+        <!-- بخش ورود رمز ادمین -->
         <div id="login-section" class="card">
             <h2>ورود ادمین</h2>
             <p>لطفاً رمز عبور پنل مدیریت را وارد کنید.</p>
@@ -213,14 +248,14 @@
             <div id="loginError" class="error-msg"></div>
         </div>
 
-        <!-- بخش دوم: نمایش لیست سفارش‌ها (بعد از ورود رمز نمایش داده می‌شود) -->
+        <!-- بخش نمایش سفارش‌ها -->
         <div id="admin-panel">
             <div class="card">
                 <h2>لیست سفارش‌های ثبت شده</h2>
                 <p>در این قسمت می‌توانید سفارش‌های جدید کاربران را مشاهده کنید.</p>
                 <br>
                 <div id="ordersList">
-                    <!-- سفارش‌ها به صورت دینامیک اینجا قرار می‌گیرند -->
+                    <!-- سفارش‌ها اینجا لود می‌شوند -->
                 </div>
             </div>
         </div>
@@ -228,7 +263,29 @@
     </div>
 
     <script>
-        // رمز عبور پنل مدیریت
+        // مدیریت تم تاریک و روشن برای صفحه مدیریت
+        const currentTheme = localStorage.getItem("siteTheme") || "dark";
+        if (currentTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+            document.getElementById("themeToggle").innerHTML = "☀️";
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute("data-theme");
+            const toggleBtn = document.getElementById("themeToggle");
+            
+            if (current === "light") {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("siteTheme", "dark");
+                toggleBtn.innerHTML = "🌙";
+            } else {
+                document.documentElement.setAttribute("data-theme", "light");
+                localStorage.setItem("siteTheme", "light");
+                toggleBtn.innerHTML = "☀️";
+            }
+        }
+
+        // رمز عبور پنل
         const CORRECT_PASSWORD = "soloway2025#";
 
         function checkPassword() {
