@@ -8,14 +8,17 @@
     
     <style>
         :root {
-            --bg-color: #f8fafc;
-            --text-main: #1e293b;
-            --primary: #dc2626;
-            --primary-hover: #b91c1c;
-            --telegram-color: #2481cc;
-            --telegram-hover: #1e6fa8;
-            --rubika-color: #9333ea;
-            --rubika-hover: #7e22ce;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --telegram-color: #0ea5e9;
+            --telegram-hover: #0284c7;
+            --rubika-color: #8b5cf6;
+            --rubika-hover: #7c3aed;
+            --border-color: #334155;
         }
 
         * {
@@ -38,27 +41,28 @@
         }
 
         header {
-            background: #ffffff;
+            background: var(--card-bg);
             padding: 20px 30px;
             border-radius: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
         }
 
         .logo {
             font-family: 'Lalezar', cursive;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
+            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-main);
-            margin-right: 15px;
+            margin-right: 20px;
             font-weight: 700;
             font-size: 0.95rem;
             transition: color 0.3s;
@@ -69,11 +73,11 @@
         }
 
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
 
@@ -83,11 +87,11 @@
             margin-bottom: 15px;
             color: var(--text-main);
             border-right: 4px solid var(--primary);
-            padding-right: 10px;
+            padding-right: 12px;
         }
 
         p, li {
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
@@ -100,14 +104,16 @@
             margin-bottom: 8px;
             font-weight: 700;
             font-size: 0.9rem;
+            color: var(--text-main);
         }
 
         input, select, textarea {
             width: 100%;
             padding: 12px 15px;
             border-radius: 12px;
-            border: 1px solid #cbd5e1;
-            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            background: #0f172a;
+            color: var(--text-main);
             font-family: 'Vazirmatn', sans-serif;
             font-size: 0.95rem;
         }
@@ -115,7 +121,7 @@
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            background: #ffffff;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
         }
 
         textarea {
@@ -126,29 +132,30 @@
         .buttons-container {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .btn {
             flex: 1;
             border: none;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border-radius: 12px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #ffffff;
-            transition: background 0.3s, transform 0.1s;
+            transition: all 0.3s;
             font-family: 'Vazirmatn', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .btn:active {
-            transform: scale(0.98);
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
         .telegram-btn {
@@ -156,6 +163,7 @@
         }
         .telegram-btn:hover {
             background: var(--telegram-hover);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
         }
 
         .rubika-btn {
@@ -163,19 +171,20 @@
         }
         .rubika-btn:hover {
             background: var(--rubika-hover);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
         }
 
-        /* استایل بخش سوالات متداول و خدمات */
         .faq-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .faq-title {
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 5px;
+            font-size: 1.05rem;
         }
 
         .admin-link-box {
@@ -185,9 +194,10 @@
         }
 
         .admin-link-box a {
-            color: #64748b;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
 
         .admin-link-box a:hover {
@@ -199,7 +209,6 @@
 
     <div class="container">
         
-        <!-- هدر سایت -->
         <header>
             <div class="logo">استودیوی دیجیتال 🚀</div>
             <div class="nav-links">
@@ -208,7 +217,6 @@
             </div>
         </header>
 
-        <!-- بخش معرفی و فرم ثبت سفارش -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
             <p>اطلاعات خود را وارد کنید و روی پیام‌رسان دلخواه جهت ارسال سفارش کلیک کنید.</p>
@@ -238,7 +246,6 @@
                     <textarea id="clientDesc" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
                 </div>
 
-                <!-- دکمه‌های ارسال به تلگرام و روبیکا -->
                 <div class="buttons-container">
                     <button type="button" class="btn telegram-btn" onclick="sendOrder('telegram')">
                         <span>✈️</span> ارسال با تلگرام
@@ -250,7 +257,6 @@
             </form>
         </section>
 
-        <!-- بخش سوالات متداول -->
         <section class="card">
             <h2>سوالات متداول</h2>
             
@@ -270,14 +276,12 @@
             </div>
         </section>
 
-        <!-- لینک پنل مدیریت -->
         <div class="admin-link-box">
             <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
 
     </div>
 
-    <!-- اسکریپت ارسال سفارش به تلگرام و روبیکا -->
     <script>
         function sendOrder(platform) {
             const name = document.getElementById('clientName').value;
@@ -290,17 +294,14 @@
                 return;
             }
 
-            // متن پیام ارسالی به شما
             const message = `سلام، سفارش جدید دارم!%0A👤 نام: ${name}%0A🛠 پروژه: ${type}%0A📞 راه ارتباطی: ${contact}%0A📝 توضیحات: ${desc}`;
 
-            // آیدی‌های شما
             const telegramId = "WreCKers_ir";
             const rubikaId = "Wild_Sniper";
 
             if (platform === 'telegram') {
                 window.location.href = `https://t.me/${telegramId}?text=${message}`;
             } else if (platform === 'rubika') {
-                // هدایت به روبیکا همراه با آیدی شما
                 window.location.href = `https://rubika.ir/${rubikaId}`;
             }
         }
