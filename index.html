@@ -295,20 +295,13 @@
                 <table class="orders-table">
                     <thead>
                         <tr>
-                            <th>شماره</th>
                             <th>نوع پروژه</th>
                             <th>تاریخ ثبت</th>
                             <th>وضعیت</th>
                         </tr>
                     </thead>
                     <tbody id="userOrdersTableBody">
-                        <!-- سفارش‌ها به صورت خودکار اینجا لود میشن -->
-                        <tr>
-                            <td>#1042</td>
-                            <td>طراحی وب‌سایت اختصاصی</td>
-                            <td>۱۴۰۵/۰۶/۱۲</td>
-                            <td><span style="color: var(--success-color); font-weight: 700;">تکمیل شده</span></td>
-                        </tr>
+                        <!-- سفارش‌ها به صورت پویا از حافظه خوانده می‌شوند؛ اگر سفارشی نباشد خالی می‌ماند -->
                     </tbody>
                 </table>
             </div>
@@ -357,6 +350,31 @@
             }
         }
 
+        // نمایش سفارش‌های ثبت شده در جدول کاربر
+        function loadUserOrders() {
+            const tbody = document.getElementById("userOrdersTableBody");
+            const orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
+            
+            tbody.innerHTML = "";
+            if (orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 15px;">هنوز سفارشی ثبت نکرده‌اید.</td></tr>`;
+                return;
+            }
+
+            orders.forEach(order => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td style="padding: 12px;">${order.type}</td>
+                    <td style="padding: 12px; font-size: 0.85rem;">${order.date}</td>
+                    <td style="padding: 12px;"><span style="color: var(--success-color); font-weight: 700;">در انتظار بررسی</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // اجرای تابع بارگذاری سفارش‌ها هنگام باز شدن صفحه
+        window.onload = loadUserOrders;
+
         // ارسال فرم و ذخیره در پنل مدیریت
         var form = document.getElementById("orderForm");
         
@@ -379,6 +397,9 @@
             let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
             orders.unshift({ name, type, contact, description, date });
             localStorage.setItem("siteOrders", JSON.stringify(orders));
+
+            // آپدیت کردن جدول سفارش‌های کاربر روی صفحه
+            loadUserOrders();
 
             var data = new FormData(event.target);
             status.innerHTML = "در حال ارسال سفارش...";
