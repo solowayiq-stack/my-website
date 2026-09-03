@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت | استودیوی طراحی دیجیتال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 20px;
+            display: none; /* تا زمان تایید رمز، صفحه مخفی است */
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .admin-nav {
+            background: #ffffff;
+            padding: 15px 25px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .admin-title {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.6rem;
+            color: #dc2626;
+        }
+
+        .logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 8px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #fecaca;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            border-right: 4px solid #dc2626;
+            padding-right: 10px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .admin-table th {
+            background: #f8fafc;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .status-select {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .status-select:focus {
+            outline: none;
+            border-color: #dc2626;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <nav class="admin-nav">
+            <div class="admin-title">پنل مدیریت استودیو 🛠️</div>
+            <a href="index.html" class="logout-btn">خروج به سایت</a>
+        </nav>
+
+        <section class="card">
+            <h2>مدیریت سفارش‌های مشتریان</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.95rem;">در این جدول می‌توانید سفارش‌های ثبت‌شده توسط کاربران را بررسی و وضعیت‌شان را بروزرسانی کنید.</p>
+            
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>کد</th>
+                            <th>نام مشتری</th>
+                            <th>نوع پروژه</th>
+                            <th>توضیحات / راه ارتباطی</th>
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1042</td>
+                            <td>علی رضایی</td>
+                            <td>طراحی وب‌سایت</td>
+                            <td>آیدی روبیکا: @ali_web <br><small style="color: var(--text-muted);">طراحی صفحه لندینگ اختصاصی</small></td>
+                            <td>
+                                <select class="status-select">
+                                    <option value="pending" selected>در انتظار بررسی</option>
+                                    <option value="doing">در حال طراحی</option>
+                                    <option value="done">تکمیل شده</option>
+                                </select>
+                            </td>
+                            <td><button class="delete-btn">حذف</button></td>
+                        </tr>
+                        <tr>
+                            <td>#1038</td>
+                            <td>سارا محمدی</td>
+                            <td>گرافیک و فتوشاپ</td>
+                            <td>شماره تماس: 0912... <br><small style="color: var(--text-muted);">بنر تبلیغاتی اینستاگرام</small></td>
+                            <td>
+                                <select class="status-select">
+                                    <option value="pending">در انتظار بررسی</option>
+                                    <option value="doing">در حال طراحی</option>
+                                    <option value="done" selected>تکمیل شده</option>
+                                </select>
+                            </td>
+                            <td><button class="delete-btn">حذف</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // بررسی رمز عبور هنگام ورود به صفحه ادمین
+        const password = prompt("لطفاً رمز عبور پنل مدیریت را وارد کنید:");
+        
+        if (password === "soloway2025#") {
+            // اگر رمز درست بود، صفحه نمایش داده میشه
+            document.body.style.display = "block";
+        } else {
+            // اگر رمز اشتباه بود یا لغو زد، کاربر رو برمی‌گردونه به صفحه اصلی
+            alert("رمز عبور اشتباه است!");
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
