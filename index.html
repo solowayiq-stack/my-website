@@ -16,6 +16,19 @@
             --primary-hover: #dc2626;
             --border-color: #334155;
             --success-color: #22c55e;
+            --input-bg: #0f172a;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --border-color: #cbd5e1;
+            --success-color: #16a34a;
+            --input-bg: #f8fafc;
         }
 
         * {
@@ -23,6 +36,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -45,7 +59,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
         }
 
@@ -53,13 +67,18 @@
             font-family: 'Lalezar', cursive;
             font-size: 2rem;
             color: var(--primary);
-            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-main);
-            margin-right: 20px;
             font-weight: 700;
             font-size: 0.95rem;
             transition: color 0.3s;
@@ -69,11 +88,26 @@
             color: var(--primary);
         }
 
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--primary);
+        }
+
         .card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
@@ -109,7 +143,7 @@
             padding: 12px 15px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            background: #0f172a;
+            background: var(--input-bg);
             color: var(--text-main);
             font-family: 'Vazirmatn', sans-serif;
             font-size: 0.95rem;
@@ -193,7 +227,9 @@
             <div class="logo">استودیوی دیجیتال 🚀</div>
             <div class="nav-links">
                 <a href="index.html">صفحه اصلی</a>
-                <a href="login.html">ورود / حساب کاربری</a>
+                <a href="admin.html">مدیریت</a>
+                <!-- دکمه تغییر تم -->
+                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
             </div>
         </header>
 
@@ -201,6 +237,7 @@
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
             <p>اطلاعات خود را وارد کنید تا سفارش شما مستقیماً در سیستم ثبت و بررسی شود.</p>
+            <br>
             
             <form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
                 <div class="form-group">
@@ -240,8 +277,8 @@
                 <p>زمان تحویل بسته به حجم و نوع پروژه متغیر است، اما عموماً بین ۳ تا ۷ روز کاری زمان می‌برد.</p>
             </div>
             <div class="faq-item">
-                <div class="faq-title">چطور می‌توانم به شما اعتماد کنم؟</div>
-                <p>ما تمامی پروژه‌ها را با شفافیت کامل پیش می‌بریم و راه ارتباطی مستقیم همیشه برقرار است.</p>
+                <div class="faq-title">شرایط پرداخت به چه صورت است؟</div>
+                <p>جهت امنیت پروژه و شروع کار، مبلغی به عنوان پیش‌پرداخت دریافت می‌گردد و مابقی پس از تأیید نهایی تسویه می‌شود.</p>
             </div>
         </section>
 
@@ -252,21 +289,48 @@
 
     </div>
 
-        <script>
+    <script>
+        // مدیریت تم تاریک و روشن
+        const currentTheme = localStorage.getItem("siteTheme") || "dark";
+        if (currentTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+            document.getElementById("themeToggle").innerHTML = "☀️";
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute("data-theme");
+            const toggleBtn = document.getElementById("themeToggle");
+            
+            if (current === "light") {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("siteTheme", "dark");
+                toggleBtn.innerHTML = "🌙";
+            } else {
+                document.documentElement.setAttribute("data-theme", "light");
+                localStorage.setItem("siteTheme", "light");
+                toggleBtn.innerHTML = "☀️";
+            }
+        }
+
+        // ارسال فرم و ذخیره در پنل مدیریت
         var form = document.getElementById("orderForm");
         
         async function handleSubmit(event) {
             event.preventDefault();
             var status = document.getElementById("form-status");
             
-            // گرفتن مقادیر فرم
             const name = document.getElementById("clientName").value;
             const type = document.getElementById("projectType").value;
             const contact = document.getElementById("clientContact").value;
             const description = document.getElementById("clientDesc").value || "بدون توضیحات";
-            const date = new Date().toLocaleString('fa-IR');
+            
+            // تولید تاریخ شمسی دقیق
+            const date = new Date().toLocaleDateString('fa-IR', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
 
-            // ذخیره در حافظه محلی برای نمایش در پنل ادمین سایت
+            // ذخیره در حافظه محلی برای پنل ادمین
             let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
             orders.unshift({ name, type, contact, description, date });
             localStorage.setItem("siteOrders", JSON.stringify(orders));
@@ -275,22 +339,21 @@
             status.innerHTML = "در حال ارسال سفارش...";
             status.style.color = "var(--text-muted)";
 
-            // ارسال به Formspree
             fetch(event.target.action, {
                 method: form.method,
                 body: data,
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    status.innerHTML = "سفارش شما با موفقیت ثبت شد و به ادمین رسید! 🎉";
+                    status.innerHTML = "سفارش شما با موفقیت ثبت شد! 🎉";
                     status.style.color = "var(--success-color)";
                     form.reset();
                 } else {
-                    status.innerHTML = "سفارش ثبت شد، اما خطایی در ارتباط رخ داد.";
+                    status.innerHTML = "سفارش ثبت شد، اما خطایی در ارتباط با سرور رخ داد.";
                     status.style.color = "var(--primary)";
                 }
             }).catch(error => {
-                status.innerHTML = "سفارش در سیستم ذخیره شد!";
+                status.innerHTML = "سفارش با موفقیت در سیستم ثبت شد!";
                 status.style.color = "var(--success-color)";
             });
         }
