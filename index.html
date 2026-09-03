@@ -130,6 +130,19 @@
             margin-bottom: 20px;
         }
 
+        .contact-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .contact-group select {
+            flex: 1;
+        }
+
+        .contact-group input {
+            flex: 2;
+        }
+
         label {
             display: block;
             margin-bottom: 8px;
@@ -273,8 +286,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="clientContact">آیدی یا شماره تماس شما:</label>
-                    <input type="text" id="clientContact" name="contact" required placeholder="مثلاً @username یا شماره تماس">
+                    <label>روش و اطلاعات ارتباطی:</label>
+                    <div class="contact-group">
+                        <select name="messenger_type" aria-label="انتخاب پیام رسان">
+                            <option value="تلگرام">تلگرام (@)</option>
+                            <option value="واتساپ">واتساپ (شماره)</option>
+                            <option value="ایتا">ایتا (شماره/آیدی)</option>
+                            <option value="روبیکا">روبیکا (شماره/آیدی)</option>
+                            <option value="شماره تماس مستقیم">تماس تلفنی</option>
+                        </select>
+                        <input type="text" id="clientContact" name="contact" required placeholder="آیدی یا شماره تماس">
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -301,7 +323,7 @@
                         </tr>
                     </thead>
                     <tbody id="userOrdersTableBody">
-                        <!-- سفارش‌ها به صورت پویا از حافظه خوانده می‌شوند؛ اگر سفارشی نباشد خالی می‌ماند -->
+                        <!-- سفارش‌ها به صورت پویا از حافظه خوانده می‌شوند -->
                     </tbody>
                 </table>
             </div>
