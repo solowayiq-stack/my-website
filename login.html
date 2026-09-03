@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به پنل کاربری | استودیوی طراحی دیجیتال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(100, 116, 139, 0.15);
+            border: 1px solid #e2e8f0;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h1 {
+            font-family: 'Lalezar', cursive;
+            color: #7c3aed;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .auth-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: #f8fafc;
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #7c3aed;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #f8fafc;
+            color: var(--text-main);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: #ffffff;
+        }
+
+        .submit-btn {
+            font-family: 'Lalezar', cursive;
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.3rem;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            transition: opacity 0.3s;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #7c3aed;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>ناحیه کاربری</h1>
+            <p>برای پیگیری سفارش‌ها وارد حساب خود شوید</p>
+        </div>
+
+        <!-- دکمه‌های جابجایی بین ورود و ثبت‌نام -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('login', event)">ورود</button>
+            <button class="tab-btn" onclick="switchTab('register', event)">ثبت‌نام</button>
+        </div>
+
+        <!-- فرم ورود -->
+        <form id="login-form" onsubmit="handleAuth(event)">
+            <div class="form-group">
+                <label for="login-email">ایمیل یا شماره موبایل:</label>
+                <input type="text" id="login-email" required placeholder="مثلاً 09123456789">
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">رمز عبور:</label>
+                <input type="password" id="login-password" required placeholder="رمز عبور خود را وارد کنید">
+            </div>
+
+            <button type="submit" class="submit-btn">ورود به حساب</button>
+        </form>
+
+        <!-- فرم ثبت‌نام -->
+        <form id="register-form" style="display: none;" onsubmit="handleAuth(event)">
+            <div class="form-group">
+                <label for="reg-name">نام و نام خانوادگی:</label>
+                <input type="text" id="reg-name" required placeholder="نام کامل خود را وارد کنید">
+            </div>
+
+            <div class="form-group">
+                <label for="reg-email">شماره موبایل یا ایمیل:</label>
+                <input type="text" id="reg-email" required placeholder="اطلاعات تماس">
+            </div>
+
+            <div class="form-group">
+                <label for="reg-password">رمز عبور:</label>
+                <input type="password" id="reg-password" required placeholder="یک رمز عبور امن انتخاب کنید">
+            </div>
+
+            <button type="submit" class="submit-btn">ثبت‌نام و ایجاد حساب</button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html">← بازگشت به صفحه اصلی سایت</a>
+        </div>
+    </div>
+
+    <script>
+        // اسکریپت جابجایی بین فرم ورود و ثبت‌نام
+        function switchTab(tab, event) {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (tab === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                event.target.classList.add('active');
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                event.target.classList.add('active');
+            }
+        }
+
+        // تابع هدایت خودکار به صفحه اصلی بعد از کلیک روی دکمه ورود/ثبت‌نام
+        function handleAuth(event) {
+            event.preventDefault(); // جلوگیری از رفرش صفحه
+            // اینجا بعداً می‌تونی کد اتصال به دیتابیس رو اضافه کنی
+            
+            // انتقال خودکار به صفحه اصلی سایت
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+
+</body>
+</html>
