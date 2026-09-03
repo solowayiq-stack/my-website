@@ -14,11 +14,8 @@
             --text-muted: #94a3b8;
             --primary: #ef4444;
             --primary-hover: #dc2626;
-            --telegram-color: #0ea5e9;
-            --telegram-hover: #0284c7;
-            --rubika-color: #8b5cf6;
-            --rubika-hover: #7c3aed;
             --border-color: #334155;
+            --success-color: #22c55e;
         }
 
         * {
@@ -129,14 +126,8 @@
             height: 100px;
         }
 
-        .buttons-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
         .btn {
-            flex: 1;
+            width: 100%;
             border: none;
             padding: 14px 20px;
             border-radius: 12px;
@@ -144,34 +135,22 @@
             font-weight: 700;
             font-size: 1rem;
             color: #ffffff;
+            background: var(--primary);
             transition: all 0.3s;
             font-family: 'Vazirmatn', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+            margin-top: 10px;
         }
 
         .btn:hover {
+            background: var(--primary-hover);
             transform: translateY(-2px);
         }
 
-        .telegram-btn {
-            background: var(--telegram-color);
-        }
-        .telegram-btn:hover {
-            background: var(--telegram-hover);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
-        }
-
-        .rubika-btn {
-            background: var(--rubika-color);
-        }
-        .rubika-btn:hover {
-            background: var(--rubika-hover);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        #form-status {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
         }
 
         .faq-item {
@@ -218,20 +197,22 @@
             </div>
         </header>
 
-        <!-- بخش فرم ثبت سفارش -->
+        <!-- بخش فرم ثبت سفارش با قابلیت ارسال به پنل -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
-            <p>اطلاعات خود را وارد کنید و روی پیام‌رسان دلخواه جهت ارسال سفارش کلیک کنید.</p>
+            <p>اطلاعات خود را وارد کنید تا سفارش شما مستقیماً در سیستم ثبت و بررسی شود.</p>
             
-            <form id="orderForm" onsubmit="return false;">
+            <!-- به جای آدرس زیر، لینک اختصاصی Formspree خودت رو بذار -->
+            <form id="orderForm" action="<form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
+" method="POST">
                 <div class="form-group">
                     <label for="clientName">نام و نام خانوادگی:</label>
-                    <input type="text" id="clientName" required placeholder="مثلاً علی رضایی">
+                    <input type="text" id="clientName" name="name" required placeholder="مثلاً علی رضایی">
                 </div>
 
                 <div class="form-group">
                     <label for="projectType">نوع پروژه:</label>
-                    <select id="projectType">
+                    <select id="projectType" name="project_type">
                         <option value="طراحی وب‌سایت">طراحی وب‌سایت</option>
                         <option value="گرافیک و فتوشاپ">گرافیک و فتوشاپ</option>
                         <option value="سایر خدمات دیجیتال">سایر خدمات دیجیتال</option>
@@ -240,43 +221,29 @@
 
                 <div class="form-group">
                     <label for="clientContact">آیدی یا شماره تماس شما:</label>
-                    <input type="text" id="clientContact" required placeholder="مثلاً @username یا شماره تماس">
+                    <input type="text" id="clientContact" name="contact" required placeholder="مثلاً @username یا شماره تماس">
                 </div>
 
                 <div class="form-group">
                     <label for="clientDesc">توضیحات پروژه:</label>
-                    <textarea id="clientDesc" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
+                    <textarea id="clientDesc" name="description" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
                 </div>
 
-                <!-- دکمه‌های ارسال به تلگرام و روبیکا -->
-                <div class="buttons-container">
-                    <button type="button" class="btn telegram-btn" onclick="sendOrder('telegram')">
-                        <span>✈️</span> ارسال با تلگرام
-                    </button>
-                    <button type="button" class="btn rubika-btn" onclick="sendOrder('rubika')">
-                        <span>💬</span> ارسال با روبیکا
-                    </button>
-                </div>
+                <button type="submit" class="btn" id="submit-btn">ثبت نهایی سفارش</button>
+                <div id="form-status"></div>
             </form>
         </section>
 
         <!-- بخش سوالات متداول -->
         <section class="card">
             <h2>سوالات متداول</h2>
-            
             <div class="faq-item">
                 <div class="faq-title">چقدر طول می‌کشد تا پروژه آماده شود؟</div>
                 <p>زمان تحویل بسته به حجم و نوع پروژه متغیر است، اما عموماً بین ۳ تا ۷ روز کاری زمان می‌برد.</p>
             </div>
-
             <div class="faq-item">
                 <div class="faq-title">چطور می‌توانم به شما اعتماد کنم؟</div>
                 <p>ما تمامی پروژه‌ها را با شفافیت کامل پیش می‌بریم و راه ارتباطی مستقیم همیشه برقرار است.</p>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-title">نحوه پرداخت هزینه‌ها به چه صورت است؟</div>
-                <p>مراحل پرداخت طی توافق اولیه و پیش از شروع به کار پروژه مشخص و هماهنگ می‌گردد.</p>
             </div>
         </section>
 
@@ -287,30 +254,43 @@
 
     </div>
 
-    <!-- اسکریپت ارسال سفارش به تلگرام و روبیکا -->
+    <!-- اسکریپت ارسال مدرن فرم بدون رفرش صفحه -->
     <script>
-        function sendOrder(platform) {
-            const name = document.getElementById('clientName').value;
-            const type = document.getElementById('projectType').value;
-            const contact = document.getElementById('clientContact').value;
-            const desc = document.getElementById('clientDesc').value || 'بدون توضیحات';
-
-            if (!name || !contact) {
-                alert('لطفاً نام و راه ارتباطی خود را وارد کنید!');
-                return;
-            }
-
-            const message = `سلام، سفارش جدید دارم!%0A👤 نام: ${name}%0A🛠 پروژه: ${type}%0A📞 راه ارتباطی: ${contact}%0A📝 توضیحات: ${desc}`;
-
-            const telegramId = "WreCKers_ir";
-            const rubikaId = "Wild_Sniper";
-
-            if (platform === 'telegram') {
-                window.location.href = `https://t.me/${telegramId}?text=${message}`;
-            } else if (platform === 'rubika') {
-                window.location.href = `https://rubika.ir/${rubikaId}`;
-            }
+        var form = document.getElementById("orderForm");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("form-status");
+            var data = new FormData(event.target);
+            
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    status.innerHTML = "سفارش شما با موفقیت ثبت شد و به دست ما رسید! 🎉";
+                    status.style.color = "var(--success-color)";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "خطایی در ثبت سفارش رخ داد، لطفاً دوباره تلاش کنید.";
+                        }
+                        status.style.color = "var(--primary)";
+                    })
+                }
+            }).catch(error => {
+                status.innerHTML = "مشکل در اتصال به شبکه! لطفاً اینترنت خود را بررسی کنید.";
+                status.style.color = "var(--primary)";
+            });
         }
+        
+        form.addEventListener("submit", handleSubmit);
     </script>
 
 </body>
