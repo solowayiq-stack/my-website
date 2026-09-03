@@ -12,6 +12,10 @@
             --text-main: #1e293b;
             --primary: #dc2626;
             --primary-hover: #b91c1c;
+            --telegram-color: #2481cc;
+            --telegram-hover: #1e6fa8;
+            --rubika-color: #9333ea;
+            --rubika-hover: #7e22ce;
         }
 
         * {
@@ -117,25 +121,49 @@
 
         textarea {
             resize: vertical;
-            height: 120px;
+            height: 100px;
         }
 
-        .submit-btn {
-            background: var(--primary);
-            color: #ffffff;
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            flex: 1;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 20px;
             border-radius: 12px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 1rem;
-            width: 100%;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            color: #ffffff;
+            transition: background 0.3s, transform 0.1s;
             font-family: 'Vazirmatn', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
         }
 
-        .submit-btn:hover {
-            background: var(--primary-hover);
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .telegram-btn {
+            background: var(--telegram-color);
+        }
+        .telegram-btn:hover {
+            background: var(--telegram-hover);
+        }
+
+        .rubika-btn {
+            background: var(--rubika-color);
+        }
+        .rubika-btn:hover {
+            background: var(--rubika-hover);
         }
 
         .admin-link-box {
@@ -167,13 +195,12 @@
             </div>
         </header>
 
-        <!-- بخش معرفی و فرم ثبت سفارش -->
+        <!-- بخش فرم ثبت سفارش -->
         <section class="card">
             <h2>ثبت سفارش پروژه</h2>
-            <p>مشخصات و نوع پروژه خود را وارد کنید تا بررسی شود.</p>
+            <p>اطلاعات خود را وارد کنید و روی پیام‌رسان دلخواه جهت ارسال سفارش کلیک کنید.</p>
             
-            <!-- فرم سفارشی که بدون خطای سرور با جاوااسکریپت مدیریت میشه -->
-            <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+            <form id="orderForm" onsubmit="return false;">
                 <div class="form-group">
                     <label for="clientName">نام و نام خانوادگی:</label>
                     <input type="text" id="clientName" required placeholder="مثلاً علی رضایی">
@@ -189,36 +216,60 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="clientDesc">توضیحات و راه ارتباطی (روبیکا، تلگرام یا شماره تماس):</label>
-                    <textarea id="clientDesc" required placeholder="جزئیات درخواست و آیدی یا شماره تماس خود را بنویسید..."></textarea>
+                    <label for="clientContact">آیدی یا شماره تماس شما:</label>
+                    <input type="text" id="clientContact" required placeholder="مثلاً @username یا شماره تماس">
                 </div>
 
-                <button type="submit" class="submit-btn">ارسال سفارش</button>
+                <div class="form-group">
+                    <label for="clientDesc">توضیحات پروژه:</label>
+                    <textarea id="clientDesc" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
+                </div>
+
+                <!-- دکمه‌های ارسال به تلگرام و روبیکا -->
+                <div class="buttons-container">
+                    <button type="button" class="btn telegram-btn" onclick="sendOrder('telegram')">
+                        <span>✈️</span> ارسال با تلگرام
+                    </button>
+                    <button type="button" class="btn rubika-btn" onclick="sendOrder('rubika')">
+                        <span>💬</span> ارسال با روبیکا
+                    </button>
+                </div>
             </form>
         </section>
 
-        <!-- لینک مخفی یا ساده برای رفتن به پنل ادمین -->
         <div class="admin-link-box">
             <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
 
     </div>
 
-    <!-- اسکریپت جلوگیری از ارور 405 و نمایش پیام موفقیت -->
     <script>
-        function handleOrderSubmit(event) {
-            event.preventDefault(); // مانع از رفرش شدن اجباری یا خطای سرور میشه
-
+        function sendOrder(platform) {
             // گرفتن مقادیر فرم
             const name = document.getElementById('clientName').value;
             const type = document.getElementById('projectType').value;
+            const contact = document.getElementById('clientContact').value;
+            const desc = document.getElementById('clientDesc').value || 'بدون توضیحات';
 
-            // نمایش پیام موفقیت به کاربر
-            alert(`کاربر گرامی ${name}، سفارش شما در زمینه "${type}" با موفقیت ثبت شد! به زودی بررسی خواهد شد.`);
+            // بررسی پر بودن فیلدهای مهم
+            if (!name || !contact) {
+                alert('لطفاً نام و راه ارتباطی خود را وارد کنید!');
+                return;
+            }
 
-            // پاک کردن فرم و رفرش ملایم صفحه برای بازگشت به حالت اولیه
-            document.getElementById('orderForm').reset();
-            window.location.href = "index.html";
+            // ساخت متن پیام آماده
+            const message = `سلام، سفارش جدید دارم!%0A👤 نام: ${name}%0A🛠 پروژه: ${type}%0A📞 راه ارتباطی: ${contact}%0A📝 توضیحات: ${desc}`;
+
+            // تنظیمات آیدی‌های خودت (اینجا رو با آیدی خودت جایگزین کن)
+            const telegramId = "@WreCKers_ir"; // مثال: alirezayi
+            const rubikaId = "@Wild_Sniper"; // آیدی یا شماره روبیکا
+
+            if (platform === 'telegram') {
+                window.location.href = `https://t.me/${telegramId}?text=${message}`;
+            } else if (platform === 'rubika') {
+                // لینک هدایت به روبیکا (یا پروفایل/پی‌وی)
+                window.location.href = `https://rubika.ir/${rubikaId}`;
+            }
         }
     </script>
 
