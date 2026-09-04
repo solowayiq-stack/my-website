@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استودیوی طراحی دیجیتال</title>
+    <title>دیجیتال خاتم | طراحی و ساخت مهر خاتم</title>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -255,7 +255,7 @@
         
         <!-- هدر سایت -->
         <header>
-            <div class="logo">استودیوی دیجیتال 🚀</div>
+            <div class="logo">دیجیتال خاتم 🚀</div>
             <div class="nav-links">
                 <a href="index.html">صفحه اصلی</a>
                 <a href="admin.html">مدیریت</a>
@@ -266,8 +266,8 @@
 
         <!-- بخش فرم ثبت سفارش -->
         <section class="card">
-            <h2>ثبت سفارش پروژه</h2>
-            <p>اطلاعات خود را وارد کنید تا سفارش شما مستقیماً در سیستم ثبت و بررسی شود.</p>
+            <h2>ثبت سفارش مهر خاتم</h2>
+            <p>اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
             <br>
             
             <form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
@@ -277,11 +277,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="projectType">نوع پروژه:</label>
+                    <label for="projectType">نوع و مدل مهر:</label>
                     <select id="projectType" name="project_type">
-                        <option value="طراحی وب‌سایت">طراحی وب‌سایت</option>
-                        <option value="گرافیک و فتوشاپ">گرافیک و فتوشاپ</option>
-                        <option value="سایر خدمات دیجیتال">سایر خدمات دیجیتال</option>
+                        <option value="مهر خاتم سنتی">مهر خاتم سنتی</option>
+                        <option value="مهر خاتم مدرن و اختصاصی">مهر خاتم مدرن و اختصاصی</option>
+                        <option value="مهر خاتم سازمانی / رسمی">مهر خاتم سازمانی / رسمی</option>
                     </select>
                 </div>
 
@@ -300,11 +300,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="clientDesc">توضیحات پروژه:</label>
-                    <textarea id="clientDesc" name="description" placeholder="جزئیات درخواست خود را بنویسید..."></textarea>
+                    <label for="clientDesc">متن و جزئیات مهر (نام، لقب، طرح خاص):</label>
+                    <textarea id="clientDesc" name="description" placeholder="متنی که می‌خواهید روی مهر درج شود را بنویسید..."></textarea>
                 </div>
 
-                <button type="submit" class="btn" id="submit-btn">ثبت نهایی سفارش</button>
+                <button type="submit" class="btn" id="submit-btn">ثبت نهایی سفارش مهر</button>
                 <div id="form-status"></div>
             </form>
         </section>
@@ -312,12 +312,12 @@
         <!-- بخش داشبورد و سفارش‌های کاربر -->
         <section class="card">
             <h2>سفارش‌های من</h2>
-            <p>در این بخش می‌توانید لیست و وضعیت پروژه‌های ثبت‌شده خود را مشاهده کنید.</p>
+            <p>در این بخش می‌توانید لیست و وضعیت سفارش‌های مهر ثبت‌شده خود را مشاهده کنید.</p>
             <div style="overflow-x: auto;">
                 <table class="orders-table">
                     <thead>
                         <tr>
-                            <th>نوع پروژه</th>
+                            <th>نوع مهر</th>
                             <th>تاریخ ثبت</th>
                             <th>وضعیت</th>
                         </tr>
@@ -333,12 +333,12 @@
         <section class="card">
             <h2>سوالات متداول</h2>
             <div class="faq-item">
-                <div class="faq-title">چقدر طول می‌کشد تا پروژه آماده شود؟</div>
-                <p>زمان تحویل بسته به حجم و نوع پروژه متغیر است، اما عموماً بین ۳ تا ۷ روز کاری زمان می‌برد.</p>
+                <div class="faq-title">طراحی مهر خاتم چقدر طول می‌کشد؟</div>
+                <p>زمان آماده‌سازی طرح بسته به جزئیات بین ۱ تا ۳ روز کاری زمان می‌برد.</p>
             </div>
             <div class="faq-item">
-                <div class="faq-title">شرایط پرداخت به چه صورت است؟</div>
-                <p>جهت امنیت پروژه و شروع کار، مبلغی به عنوان پیش‌پرداخت دریافت می‌گردد و مابقی پس از تأیید نهایی تسویه می‌شود.</p>
+                <div class="faq-title">خروجی طرح به چه صورتی تحویل داده می‌شود؟</div>
+                <p>طرح نهایی باکیفیت بالا و فرمت‌های استاندارد از طریق پیام‌رسان‌ها برای شما ارسال می‌گردد.</p>
             </div>
         </section>
 
@@ -433,7 +433,7 @@
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    status.innerHTML = "سفارش شما با موفقیت ثبت شد! 🎉";
+                    status.innerHTML = "سفارش مهر شما با موفقیت ثبت شد! 🎉";
                     status.style.color = "var(--success-color)";
                     form.reset();
                 } else {
