@@ -169,7 +169,7 @@
         <div class="header">
             <div class="logo">دیجیتال خاتم 🚀</div>
             <div class="nav-links">
-                <button class="theme-toggle" onclick="toggleTheme()">🌙 حالت شب/روز</button>
+                <button class="theme-toggle" onclick="toggleTheme()">☾/☼</button>
                 <a href="admin.html" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem; font-weight: 700;">مدیریت</a>
             </div>
         </div>
@@ -178,7 +178,8 @@
             <h2>ثبت سفارش مهر خاتم</h2>
             <p style="font-size: 0.85rem;">اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
             
-            <form action="https://formspree.io/f/xvkornpl" method="POST">
+            <form id="orderForm">
+                
                 <label>نام و نام خانوادگی:</label>
                 <input type="text" name="name" placeholder="مثلاً علی رضایی" required>
 
