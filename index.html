@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دیجیتال خاتم | صفحه اصلی</title>
+    <!-- لود کردن فونت وزیرمتن و لاله‌زار از گوگل فونت -->
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0284c7; /* آبی آسمونی تیره */
+            --primary-color: #0284c7;
             --primary-hover: #0369a1;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --border-color: #e2e8f0;
+            --muted-color: #64748b;
         }
+
+        [data-theme="dark"] {
+            --primary-color: #38bdf8;
+            --primary-hover: #0ea5e9;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --border-color: #334155;
+            --muted-color: #94a3b8;
+        }
+
         body {
-            font-family: Tahoma, sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
+            transition: background 0.3s, color 0.3s;
         }
         .container {
             max-width: 600px;
@@ -35,9 +50,15 @@
             margin-bottom: 20px;
         }
         .logo {
+            font-family: 'Lalezar', cursive;
             color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         .card {
             background: var(--card-bg);
@@ -45,13 +66,20 @@
             border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-bottom: 20px;
+            transition: background 0.3s;
         }
         h2 {
-            font-size: 1.1rem;
+            font-family: 'Lalezar', cursive;
+            font-size: 1.3rem;
             border-right: 4px solid var(--primary-color);
             padding-right: 10px;
             margin-top: 0;
             color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+        label {
+            font-weight: 700;
+            font-size: 0.9rem;
         }
         input, select, textarea {
             width: 100%;
@@ -59,9 +87,11 @@
             margin-top: 8px;
             margin-bottom: 15px;
             border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-color);
             border-radius: 8px;
             box-sizing: border-box;
-            font-family: Tahoma, sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
         }
         button {
             background-color: var(--primary-color);
@@ -70,9 +100,10 @@
             padding: 12px;
             width: 100%;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
-            font-family: Tahoma, sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: background 0.2s;
         }
         button:hover {
             background-color: var(--primary-hover);
@@ -83,6 +114,7 @@
             padding: 4px 8px;
             border-radius: 6px;
             font-size: 0.85rem;
+            font-weight: 700;
         }
         table {
             width: 100%;
@@ -95,14 +127,30 @@
             border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            width: auto;
+        }
+        .theme-toggle:hover {
+            background: var(--border-color);
+        }
         .footer-link {
             text-align: center;
             margin-top: 20px;
         }
         .footer-link a {
-            color: #64748b;
+            color: var(--muted-color);
             text-decoration: none;
             font-size: 0.85rem;
+        }
+        p {
+            color: var(--muted-color);
         }
     </style>
 </head>
@@ -110,15 +158,16 @@
 
     <div class="container">
         <div class="header">
-            <div class="logo">🚀 دیجیتال خاتم</div>
-            <div>
-                <a href="admin.html" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem;">مدیریت</a>
+            <div class="logo">دیجیتال خاتم 🚀</div>
+            <div class="nav-links">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙 حالت شب/روز</button>
+                <a href="admin.html" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem; font-weight: 700;">مدیریت</a>
             </div>
         </div>
 
         <div class="card">
             <h2>ثبت سفارش مهر خاتم</h2>
-            <p style="font-size: 0.85rem; color: #64748b;">اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
+            <p style="font-size: 0.85rem;">اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
             
             <label>نام و نام خانوادگی:</label>
             <input type="text" placeholder="مثلاً علی رضایی">
@@ -140,7 +189,7 @@
 
         <div class="card">
             <h2>سفارش‌های من</h2>
-            <p style="font-size: 0.85rem; color: #64748b;">در این بخش می‌توانید لیست و وضعیت سفارش‌های مهر ثبت‌شده خود را مشاهده کنید.</p>
+            <p style="font-size: 0.85rem;">در این بخش می‌توانید لیست و وضعیت سفارش‌های مهر ثبت‌شده خود را مشاهده کنید.</p>
             <table>
                 <tr>
                     <th>نوع مهر</th>
@@ -157,11 +206,11 @@
 
         <div class="card">
             <h2>سوالات متداول</h2>
-            <p style="font-size: 0.9rem; font-weight: bold;">طراحی مهر خاتم چقدر طول می‌کشد؟</p>
-            <p style="font-size: 0.85rem; color: #64748b;">زمان آماده‌سازی طرح بسته به جزئیات بین ۱ تا ۳ روز کاری زمان می‌برد.</p>
+            <p style="font-size: 0.9rem; font-weight: bold; color: var(--text-color);">طراحی مهر خاتم چقدر طول می‌کشد؟</p>
+            <p style="font-size: 0.85rem;">زمان آماده‌سازی طرح بسته به جزئیات بین ۱ تا ۳ روز کاری زمان می‌برد.</p>
             
-            <p style="font-size: 0.9rem; font-weight: bold;">خروجی طرح به چه صورتی تحویل داده می‌شود؟</p>
-            <p style="font-size: 0.85rem; color: #64748b;">طرح نهایی با کیفیت بالا و فرمت‌های استاندارد از طریق پیام‌رسان‌ها برای شما ارسال می‌گردد.</p>
+            <p style="font-size: 0.9rem; font-weight: bold; color: var(--text-color);">خروجی طرح به چه صورتی تحویل داده می‌شود؟</p>
+            <p style="font-size: 0.85rem;">طرح نهایی با کیفیت بالا و فرمت‌های استاندارد از طریق پیام‌رسان‌ها برای شما ارسال می‌گردد.</p>
         </div>
 
         <div class="footer-link">
@@ -169,5 +218,18 @@
         </div>
     </div>
 
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // بارگذاری تم ذخیره شده
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </body>
 </html>
