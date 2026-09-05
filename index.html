@@ -3,451 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دیجیتال خاتم | طراحی و ساخت مهر خاتم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
-    
+    <title>دیجیتال خاتم | صفحه اصلی</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #ef4444;
-            --primary-hover: #dc2626;
-            --border-color: #334155;
-            --success-color: #22c55e;
-            --input-bg: #0f172a;
-        }
-
-        [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --primary-color: #0284c7; /* آبی آسمونی تیره */
+            --primary-hover: #0369a1;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --primary: #ef4444;
-            --primary-hover: #dc2626;
-            --border-color: #cbd5e1;
-            --success-color: #16a34a;
-            --input-bg: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Vazirmatn', sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-
         body {
+            font-family: Tahoma, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
+            color: var(--text-color);
+            margin: 0;
             padding: 20px;
         }
-
         .container {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
         }
-
-        header {
+        .header {
             background: var(--card-bg);
-            padding: 20px 30px;
-            border-radius: 20px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
-
         .logo {
-            font-family: 'Lalezar', cursive;
-            font-size: 2rem;
-            color: var(--primary);
-            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
         }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle-btn:hover {
-            border-color: var(--primary);
-        }
-
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        h2 {
-            font-family: 'Lalezar', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-            border-right: 4px solid var(--primary);
-            padding-right: 12px;
-        }
-
-        p, li {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .form-group {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
-
-        .contact-group {
-            display: flex;
-            gap: 10px;
+        h2 {
+            font-size: 1.1rem;
+            border-right: 4px solid var(--primary-color);
+            padding-right: 10px;
+            margin-top: 0;
+            color: var(--text-color);
         }
-
-        .contact-group select {
-            flex: 1;
-        }
-
-        .contact-group input {
-            flex: 2;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
         input, select, textarea {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
             border: 1px solid var(--border-color);
-            background: var(--input-bg);
-            color: var(--text-main);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: Tahoma, sans-serif;
         }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
-        }
-
-        textarea {
-            resize: vertical;
-            height: 100px;
-        }
-
-        .btn {
-            width: 100%;
+        button {
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            padding: 14px 20px;
-            border-radius: 12px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #ffffff;
-            background: var(--primary);
-            transition: all 0.3s;
-            font-family: 'Vazirmatn', sans-serif;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-            margin-top: 10px;
+            font-family: Tahoma, sans-serif;
         }
-
-        .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
+        button:hover {
+            background-color: var(--primary-hover);
         }
-
-        #form-status {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: 700;
+        .status-badge {
+            color: #16a34a;
+            background: #dcfce7;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
         }
-
-        .faq-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .faq-title {
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 5px;
-            font-size: 1.05rem;
-        }
-
-        .admin-link-box {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 20px;
-        }
-
-        .admin-link-box a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .admin-link-box a:hover {
-            color: var(--primary);
-        }
-
-        .orders-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 10px;
         }
-
-        .orders-table th, .orders-table td {
-            padding: 12px;
+        th, td {
+            padding: 10px;
             text-align: right;
             border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
-
-        .orders-table th {
-            color: var(--text-main);
-            font-weight: 700;
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer-link a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- هدر سایت -->
-        <header>
-            <div class="logo">دیجیتال خاتم 🚀</div>
-            <div class="nav-links">
-                <a href="index.html">صفحه اصلی</a>
-                <a href="admin.html">مدیریت</a>
-                <!-- دکمه تغییر تم -->
-                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        <div class="header">
+            <div class="logo">🚀 دیجیتال خاتم</div>
+            <div>
+                <a href="admin.html" style="text-decoration: none; color: var(--primary-color); font-size: 0.9rem;">مدیریت</a>
             </div>
-        </header>
-
-        <!-- بخش فرم ثبت سفارش -->
-        <section class="card">
-            <h2>ثبت سفارش مهر خاتم</h2>
-            <p>اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
-            <br>
-            
-            <form id="orderForm" action="https://formspree.io/f/xvkornpl" method="POST">
-                <div class="form-group">
-                    <label for="clientName">نام و نام خانوادگی:</label>
-                    <input type="text" id="clientName" name="name" required placeholder="مثلاً علی رضایی">
-                </div>
-
-                <div class="form-group">
-                    <label for="projectType">نوع و مدل مهر:</label>
-                    <select id="projectType" name="project_type">
-                        <option value="مهر خاتم سنتی">مهر خاتم سنتی</option>
-                        <option value="مهر خاتم مدرن و اختصاصی">مهر خاتم مدرن و اختصاصی</option>
-                        <option value="مهر خاتم سازمانی / رسمی">مهر خاتم سازمانی / رسمی</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>روش و اطلاعات ارتباطی (چت):</label>
-                    <div class="contact-group">
-                        <select name="messenger_type" aria-label="انتخاب پیام رسان">
-                            <option value="تلگرام">تلگرام (@)</option>
-                            <option value="واتساپ">واتساپ (شماره)</option>
-                            <option value="ایتا">ایتا (شماره/آیدی)</option>
-                            <option value="روبیکا">روبیکا (شماره/آیدی)</option>
-                            <option value="سروش یا بله">سروش / بله</option>
-                        </select>
-                        <input type="text" id="clientContact" name="contact" required placeholder="آیدی یا شماره چت">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="clientDesc">متن و جزئیات مهر (نام، لقب، طرح خاص):</label>
-                    <textarea id="clientDesc" name="description" placeholder="متنی که می‌خواهید روی مهر درج شود را بنویسید..."></textarea>
-                </div>
-
-                <button type="submit" class="btn" id="submit-btn">ثبت نهایی سفارش مهر</button>
-                <div id="form-status"></div>
-            </form>
-        </section>
-
-        <!-- بخش داشبورد و سفارش‌های کاربر -->
-        <section class="card">
-            <h2>سفارش‌های من</h2>
-            <p>در این بخش می‌توانید لیست و وضعیت سفارش‌های مهر ثبت‌شده خود را مشاهده کنید.</p>
-            <div style="overflow-x: auto;">
-                <table class="orders-table">
-                    <thead>
-                        <tr>
-                            <th>نوع مهر</th>
-                            <th>تاریخ ثبت</th>
-                            <th>وضعیت</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userOrdersTableBody">
-                        <!-- سفارش‌ها به صورت پویا از حافظه خوانده می‌شوند -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- بخش سوالات متداول -->
-        <section class="card">
-            <h2>سوالات متداول</h2>
-            <div class="faq-item">
-                <div class="faq-title">طراحی مهر خاتم چقدر طول می‌کشد؟</div>
-                <p>زمان آماده‌سازی طرح بسته به جزئیات بین ۱ تا ۳ روز کاری زمان می‌برد.</p>
-            </div>
-            <div class="faq-item">
-                <div class="faq-title">خروجی طرح به چه صورتی تحویل داده می‌شود؟</div>
-                <p>طرح نهایی باکیفیت بالا و فرمت‌های استاندارد از طریق پیام‌رسان‌ها برای شما ارسال می‌گردد.</p>
-            </div>
-        </section>
-
-        <!-- لینک پنل مدیریت -->
-        <div class="admin-link-box">
-            <a href="admin.html">ورود به پنل مدیریت 🔒</a>
         </div>
 
+        <div class="card">
+            <h2>ثبت سفارش مهر خاتم</h2>
+            <p style="font-size: 0.85rem; color: #64748b;">اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
+            
+            <label>نام و نام خانوادگی:</label>
+            <input type="text" placeholder="مثلاً علی رضایی">
+
+            <label>نوع و مدل مهر:</label>
+            <select>
+                <option>مهر خاتم سنتی</option>
+                <option>مهر خاتم مدرن</option>
+            </select>
+
+            <label>روش و اطلاعات ارتباطی (چت):</label>
+            <input type="text" placeholder="آیدی یا شماره چت">
+
+            <label>متن و جزئیات مهر (نام، لقب، طرح خاص):</label>
+            <textarea rows="3" placeholder="متنی که می‌خواهید روی مهر درج شود را بنویسید..."></textarea>
+
+            <button>ثبت نهایی سفارش مهر</button>
+        </div>
+
+        <div class="card">
+            <h2>سفارش‌های من</h2>
+            <p style="font-size: 0.85rem; color: #64748b;">در این بخش می‌توانید لیست و وضعیت سفارش‌های مهر ثبت‌شده خود را مشاهده کنید.</p>
+            <table>
+                <tr>
+                    <th>نوع مهر</th>
+                    <th>تاریخ ثبت</th>
+                    <th>وضعیت</th>
+                </tr>
+                <tr>
+                    <td>مهر خاتم سنتی</td>
+                    <td>۱۴۰۵/۰۶/۱۴ - ۱۷:۴۷:۵۲</td>
+                    <td><span class="status-badge">در انتظار بررسی</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>سوالات متداول</h2>
+            <p style="font-size: 0.9rem; font-weight: bold;">طراحی مهر خاتم چقدر طول می‌کشد؟</p>
+            <p style="font-size: 0.85rem; color: #64748b;">زمان آماده‌سازی طرح بسته به جزئیات بین ۱ تا ۳ روز کاری زمان می‌برد.</p>
+            
+            <p style="font-size: 0.9rem; font-weight: bold;">خروجی طرح به چه صورتی تحویل داده می‌شود؟</p>
+            <p style="font-size: 0.85rem; color: #64748b;">طرح نهایی با کیفیت بالا و فرمت‌های استاندارد از طریق پیام‌رسان‌ها برای شما ارسال می‌گردد.</p>
+        </div>
+
+        <div class="footer-link">
+            <a href="admin.html">🔒 ورود به پنل مدیریت</a>
+        </div>
     </div>
-
-    <script>
-        // مدیریت تم تاریک و روشن
-        const currentTheme = localStorage.getItem("siteTheme") || "dark";
-        if (currentTheme === "light") {
-            document.documentElement.setAttribute("data-theme", "light");
-            document.getElementById("themeToggle").innerHTML = "☀️";
-        }
-
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute("data-theme");
-            const toggleBtn = document.getElementById("themeToggle");
-            
-            if (current === "light") {
-                document.documentElement.removeAttribute("data-theme");
-                localStorage.setItem("siteTheme", "dark");
-                toggleBtn.innerHTML = "🌙";
-            } else {
-                document.documentElement.setAttribute("data-theme", "light");
-                localStorage.setItem("siteTheme", "light");
-                toggleBtn.innerHTML = "☀️";
-            }
-        }
-
-        // نمایش سفارش‌های ثبت شده در جدول کاربر
-        function loadUserOrders() {
-            const tbody = document.getElementById("userOrdersTableBody");
-            const orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
-            
-            tbody.innerHTML = "";
-            if (orders.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 15px;">هنوز سفارشی ثبت نکرده‌اید.</td></tr>`;
-                return;
-            }
-
-            orders.forEach(order => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td style="padding: 12px;">${order.type}</td>
-                    <td style="padding: 12px; font-size: 0.85rem;">${order.date}</td>
-                    <td style="padding: 12px;"><span style="color: var(--success-color); font-weight: 700;">در انتظار بررسی</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // اجرای تابع بارگذاری سفارش‌ها هنگام باز شدن صفحه
-        window.onload = loadUserOrders;
-
-        // ارسال فرم و ذخیره در پنل مدیریت
-        var form = document.getElementById("orderForm");
-        
-        async function handleSubmit(event) {
-            event.preventDefault();
-            var status = document.getElementById("form-status");
-            
-            const name = document.getElementById("clientName").value;
-            const type = document.getElementById("projectType").value;
-            const contact = document.getElementById("clientContact").value;
-            const description = document.getElementById("clientDesc").value || "بدون توضیحات";
-            
-            // تولید تاریخ شمسی دقیق
-            const date = new Date().toLocaleDateString('fa-IR', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit', second: '2-digit'
-            });
-
-            // ذخیره در حافظه محلی برای پنل ادمین
-            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
-            orders.unshift({ name, type, contact, description, date });
-            localStorage.setItem("siteOrders", JSON.stringify(orders));
-
-            // آپدیت کردن جدول سفارش‌های کاربر روی صفحه
-            loadUserOrders();
-
-            var data = new FormData(event.target);
-            status.innerHTML = "در حال ارسال سفارش...";
-            status.style.color = "var(--text-muted)";
-
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    status.innerHTML = "سفارش مهر شما با موفقیت ثبت شد! 🎉";
-                    status.style.color = "var(--success-color)";
-                    form.reset();
-                } else {
-                    status.innerHTML = "سفارش ثبت شد، اما خطایی در ارتباط با سرور رخ داد.";
-                    status.style.color = "var(--primary)";
-                }
-            }).catch(error => {
-                status.innerHTML = "سفارش با موفقیت در سیستم ثبت شد!";
-                status.style.color = "var(--success-color)";
-            });
-        }
-        
-        form.addEventListener("submit", handleSubmit);
-    </script>
 
 </body>
 </html>
