@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دیجیتال خاتم | پنل مدیریت</title>
-    <!-- لود کردن فونت وزیرمتن و لاله‌زار -->
+    <title>دیجیتال خاتم | پنل مدیریت امن</title>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -93,14 +92,31 @@
         th {
             background-color: var(--table-header);
         }
-        select {
-            padding: 5px;
+        select, input[type="password"] {
+            padding: 8px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
             background-color: var(--card-bg);
             color: var(--text-color);
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            width: 100%;
+        }
+        button:hover {
+            background-color: var(--primary-hover);
         }
         .theme-toggle {
             background: transparent;
@@ -110,6 +126,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85rem;
+            width: auto;
         }
         .theme-toggle:hover {
             background: var(--border-color);
@@ -140,9 +157,18 @@
             </div>
         </div>
 
-        <div class="card">
+        <!-- فرم ورود رمز -->
+        <div class="card" id="login-box">
+            <h2>احراز هویت مدیر</h2>
+            <p>برای ورود به پنل مدیریت و بررسی سفارش‌ها، رمز عبور را وارد کنید:</p>
+            <input type="password" id="admin-pass" placeholder="رمز عبور...">
+            <button onclick="checkPassword()">ورود به پنل</button>
+        </div>
+
+        <!-- محتوای اصلی پنل (در ابتدا مخفی است) -->
+        <div class="card" id="admin-panel" style="display: none;">
             <h2>مدیریت سفارش‌های ثبت شده</h2>
-            <p style="font-size: 0.85rem;">در اینجا می‌توانید وضعیت سفارش‌ها را تغییر دهید.</p>
+            <p>در اینجا می‌توانید وضعیت سفارش‌ها را تغییر دهید.</p>
             
             <table>
                 <tr>
@@ -172,6 +198,16 @@
     </div>
 
     <script>
+        function checkPassword() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === 'soloway2025#') {
+                document.getElementById('login-box').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert('رمز عبور اشتباه است کاکو!');
+            }
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -180,7 +216,6 @@
             localStorage.setItem('theme', newTheme);
         }
 
-        // بارگذاری تم ذخیره شده
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
     </script>
