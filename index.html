@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دیجیتال خاتم | صفحه سفارش</title>
+    <!-- لود فونت وزیرمتن از گوگل‌فونتز برای زیبایی سایت -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* استایل‌های پایه برای ظاهر سایت */
         :root {
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
@@ -23,7 +24,7 @@
         }
 
         body {
-            font-family: Tahoma, Arial, sans-serif;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -54,6 +55,23 @@
             color: var(--primary-color);
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-link {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+        }
+
         .theme-toggle {
             background: none;
             border: 1px solid var(--border-color);
@@ -70,6 +88,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
 
         h2 {
@@ -127,15 +146,30 @@
         button[type="submit"]:hover {
             opacity: 0.9;
         }
+
+        .faq-section h3 {
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .faq-section p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- هدر سایت همراه با دکمه دارک/لایت مود -->
+        <!-- هدر سایت همراه با دکمه مدیریت و دارک‌مود -->
         <div class="header">
             <div class="logo">دیجیتال خاتم 🚀</div>
-            <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
+            <div class="nav-links">
+                <a href="admin.html" class="admin-link">⚙️ مدیریت</a>
+                <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
+            </div>
         </div>
 
         <!-- فرم ثبت سفارش -->
@@ -171,11 +205,22 @@
                 <button type="submit">ثبت نهایی سفارش مهر</button>
             </form>
         </div>
+
+        <!-- بخش سوالات متداول -->
+        <div class="card faq-section">
+            <h2>سوالات متداول</h2>
+            
+            <h3>سفارش‌ها چطور ارسال می‌شوند؟</h3>
+            <p>پس از طراحی، فایل نهایی یا اطلاعات از طریق پیام‌رسانی که انتخاب کرده‌اید برای شما ارسال می‌شود.</p>
+
+            <h3>مدت زمان آماده‌سازی چقدر است؟</h3>
+            <p>معمولاً بین ۲۴ تا ۴۸ ساعت کاری زمان می‌برد تا طرح آماده و تایید نهایی شود.</p>
+        </div>
     </div>
 
-    <!-- کدهای جاوااسکریپت برای مدیریت دارک‌مود و ارسال مستقیم به تلگرام -->
+    <!-- کدهای جاوااسکریپت -->
     <script>
-        // ۱. منطق دکمه دارک‌مود و لایت‌مود
+        // ۱. دارک‌مود
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             if (document.body.classList.contains('dark-mode')) {
@@ -185,32 +230,28 @@
             }
         }
 
-        // اعمال حالت ذخیره شده قبلی هنگام باز شدن سایت
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('dark-mode');
             }
         });
 
-        // ۲. منطق ارسال اطلاعات فرم به ربات تلگرام
+        // ۲. ارسال مستقیم به ربات تلگرام
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // جمع‌آوری مقادیر فیلدها
             const name = document.querySelector('input[name="name"]').value;
             const sealType = document.querySelector('select[name="seal_type"]').value;
             const messenger = document.querySelector('select[name="messenger"]').value;
             const contactInfo = document.querySelector('input[name="contact_info"]').value;
             const details = document.querySelector('textarea[name="details"]').value;
 
-            // ساخت قالب پیام برای ارسال به پی‌وی شما
             const message = `🚨 سفارش جدید در سایت دیجیتال خاتم:\n\n👤 نام و نام خانوادگی: ${name}\n🏷 نوع مهر: ${sealType}\n💬 پیام‌رسان: ${messenger}\n📞 اطلاعات ارتباطی: ${contactInfo}\n📝 جزئیات مهر:\n${details}`;
 
             const token = '8935228797:AAH5Wk8xecbxMJiwEXtbLEncrBEgHA_lBys';
             const chatId = '8217024475';
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-            // ارسال درخواست به سرور تلگرام
             fetch(url, {
                 method: 'POST',
                 headers: {
