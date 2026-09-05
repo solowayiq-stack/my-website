@@ -239,16 +239,47 @@
     </div>
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+    // گرفتن اطلاعات از فرم (نام، شماره تماس، و توضیحات/سرویس)
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const details = document.getElementById('details').value;
+
+    // متن پیامی که قراره بیاد برای خودت در تلگرام
+    const message = `🚨 سفارش جدید در سایت دیجیتال خاتم:\n\n👤 نام: ${name}\n📞 شماره تماس: ${phone}\n📝 جزئیات سفارش:\n${details}`;
+
+    // اطلاعات ربات تلگرام شما
+    const token = '8935228797:AAH5Wk8xecbxMJiwEXtbLEncrBEgHA_lBys';
+    const chatId = '8217024475';
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+    // ارسال درخواست به سرور تلگرام
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('سفارش شما با موفقیت ثبت شد و به دست ما رسید! 🙏');
+            document.getElementById('orderForm').reset();
+        } else {
+            alert('خطا در ارسال سفارش. لطفاً دوباره تلاش کنید.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('خطایی در ارتباط با سرور رخ داد.');
+    });
+});
+
     </script>
 </body>
 </html>
