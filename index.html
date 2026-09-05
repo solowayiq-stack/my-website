@@ -92,7 +92,17 @@
             box-sizing: border-box;
             font-family: 'Vazirmatn', sans-serif;
         }
-        button {
+        .contact-group {
+            display: flex;
+            gap: 10px;
+        }
+        .contact-group select {
+            width: 35%;
+        }
+        .contact-group input {
+            width: 65%;
+        }
+        button[type="submit"] {
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -104,7 +114,7 @@
             font-family: 'Vazirmatn', sans-serif;
             transition: background 0.2s;
         }
-        button:hover {
+        button[type="submit"]:hover {
             background-color: var(--primary-hover);
         }
         .status-badge {
@@ -164,26 +174,37 @@
             </div>
         </div>
 
+        <!-- فرم واقعی ثبت سفارش متصل به ایمیل -->
         <div class="card">
             <h2>ثبت سفارش مهر خاتم</h2>
             <p style="font-size: 0.85rem;">اطلاعات و متن دلخواه خود را وارد کنید تا سفارش طراحی مهر شما مستقیماً ثبت و بررسی شود.</p>
             
-            <label>نام و نام خانوادگی:</label>
-            <input type="text" placeholder="مثلاً علی رضایی">
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                <label>نام و نام خانوادگی:</label>
+                <input type="text" name="name" placeholder="مثلاً علی رضایی" required>
 
-            <label>نوع و مدل مهر:</label>
-            <select>
-                <option>مهر خاتم سنتی</option>
-                <option>مهر خاتم مدرن</option>
-            </select>
+                <label>نوع و مدل مهر:</label>
+                <select name="seal_type">
+                    <option>مهر خاتم سنتی</option>
+                    <option>مهر خاتم مدرن</option>
+                </select>
 
-            <label>روش و اطلاعات ارتباطی (چت):</label>
-            <input type="text" placeholder="آیدی یا شماره چت">
+                <label>روش و اطلاعات ارتباطی (چت):</label>
+                <div class="contact-group">
+                    <select name="messenger">
+                        <option>تلگرام (@)</option>
+                        <option>ایتا</option>
+                        <option>بله</option>
+                        <option>واتساپ</option>
+                    </select>
+                    <input type="text" name="contact_info" placeholder="آیدی یا شماره تماس" required>
+                </div>
 
-            <label>متن و جزئیات مهر (نام، لقب، طرح خاص):</label>
-            <textarea rows="3" placeholder="متنی که می‌خواهید روی مهر درج شود را بنویسید..."></textarea>
+                <label>متن و جزئیات مهر (نام، لقب، طرح خاص):</label>
+                <textarea name="details" rows="3" placeholder="متنی که می‌خواهید روی مهر درج شود را بنویسید..." required></textarea>
 
-            <button>ثبت نهایی سفارش مهر</button>
+                <button type="submit">ثبت نهایی سفارش مهر</button>
+            </form>
         </div>
 
         <div class="card">
