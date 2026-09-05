@@ -3,335 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل مدیریت سفارشات</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
-    
+    <title>دیجیتال خاتم | پنل مدیریت</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #ef4444;
-            --primary-hover: #dc2626;
-            --border-color: #334155;
-            --success-color: #22c55e;
-            --input-bg: #0f172a;
-        }
-
-        [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --primary-color: #0284c7; /* آبی آسمونی تیره */
+            --primary-hover: #0369a1;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --primary: #ef4444;
-            --primary-hover: #dc2626;
-            --border-color: #cbd5e1;
-            --success-color: #16a34a;
-            --input-bg: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Vazirmatn', sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-
         body {
+            font-family: Tahoma, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
+            color: var(--text-color);
+            margin: 0;
             padding: 20px;
         }
-
         .container {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
         }
-
-        header {
+        .header {
             background: var(--card-bg);
-            padding: 20px 30px;
-            border-radius: 20px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
-
         .logo {
-            font-family: 'Lalezar', cursive;
-            font-size: 2rem;
-            color: var(--primary);
-            text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
         }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle-btn:hover {
-            border-color: var(--primary);
-        }
-
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        h2 {
-            font-family: 'Lalezar', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-            border-right: 4px solid var(--primary);
-            padding-right: 12px;
-        }
-
-        p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        #login-section {
-            max-width: 400px;
-            margin: 50px auto;
-            text-align: center;
-        }
-
-        .admin-input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background: var(--input-bg);
-            color: var(--text-main);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .admin-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn {
-            width: 100%;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #ffffff;
-            background: var(--primary);
-            transition: all 0.3s;
-            font-family: 'Vazirmatn', sans-serif;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        .btn:hover {
-            background: var(--primary-hover);
-        }
-
-        .order-card {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
             padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
-
-        .order-card h3 {
-            color: var(--text-main);
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+        h2 {
+            font-size: 1.1rem;
+            border-right: 4px solid var(--primary-color);
+            padding-right: 10px;
+            margin-top: 0;
+            color: var(--text-color);
         }
-
-        .order-card p {
-            margin-bottom: 5px;
-        }
-
-        .order-date {
-            font-size: 0.85rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            display: inline-block;
-            font-weight: 700;
-        }
-
-        .delete-btn {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 10px;
-            transition: all 0.3s;
-            font-family: 'Vazirmatn', sans-serif;
         }
-
-        .delete-btn:hover {
-            background: var(--primary);
-            color: #fff;
+        th, td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
         }
-
-        #admin-panel {
-            display: none;
+        th {
+            background-color: #f1f5f9;
         }
-
-        .error-msg {
-            color: var(--primary);
+        select {
+            padding: 5px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-family: Tahoma, sans-serif;
+            font-size: 0.8rem;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
             font-size: 0.9rem;
-            margin-top: 10px;
-            font-weight: 700;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- هدر پنل -->
-        <header>
-            <div class="logo">مدیریت سفارشات 🔒</div>
-            <div class="nav-links">
-                <a href="index.html">بازگشت به سایت</a>
-                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
-            </div>
-        </header>
-
-        <!-- بخش ورود رمز ادمین -->
-        <div id="login-section" class="card">
-            <h2>ورود ادمین</h2>
-            <p>لطفاً رمز عبور پنل مدیریت را وارد کنید.</p>
-            <br>
-            <input type="password" id="adminPassword" class="admin-input" placeholder="رمز عبور...">
-            <button onclick="checkPassword()" class="btn">ورود به پنل</button>
-            <div id="loginError" class="error-msg"></div>
-        </div>
-
-        <!-- بخش نمایش سفارش‌ها -->
-        <div id="admin-panel">
-            <div class="card">
-                <h2>لیست سفارش‌های ثبت شده</h2>
-                <p>در این قسمت می‌توانید سفارش‌های جدید کاربران را مشاهده کنید.</p>
-                <br>
-                <div id="ordersList">
-                    <!-- سفارش‌ها اینجا لود می‌شوند -->
-                </div>
+        <div class="header">
+            <div class="logo">🔒 پنل مدیریت دیجیتال خاتم</div>
+            <div>
+                <a href="index.html" style="text-decoration: none; color: #64748b; font-size: 0.9rem;">مشاهده سایت</a>
             </div>
         </div>
 
-    </div>
-
-    <script>
-        // مدیریت تم تاریک و روشن برای صفحه مدیریت
-        const currentTheme = localStorage.getItem("siteTheme") || "dark";
-        if (currentTheme === "light") {
-            document.documentElement.setAttribute("data-theme", "light");
-            document.getElementById("themeToggle").innerHTML = "☀️";
-        }
-
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute("data-theme");
-            const toggleBtn = document.getElementById("themeToggle");
+        <div class="card">
+            <h2>مدیریت سفارش‌های ثبت شده</h2>
+            <p style="font-size: 0.85rem; color: #64748b;">در اینجا می‌توانید وضعیت سفارش‌ها را تغییر دهید.</p>
             
-            if (current === "light") {
-                document.documentElement.removeAttribute("data-theme");
-                localStorage.setItem("siteTheme", "dark");
-                toggleBtn.innerHTML = "🌙";
-            } else {
-                document.documentElement.setAttribute("data-theme", "light");
-                localStorage.setItem("siteTheme", "light");
-                toggleBtn.innerHTML = "☀️";
-            }
-        }
+            <table>
+                <tr>
+                    <th>مشتری</th>
+                    <th>نوع مهر</th>
+                    <th>تاریخ</th>
+                    <th>تغییر وضعیت</th>
+                </tr>
+                <tr>
+                    <td>علی رضایی</td>
+                    <td>مهر خاتم سنتی</td>
+                    <td>۱۴۰۵/۰۶/۱۴</td>
+                    <td>
+                        <select>
+                            <option selected>در انتظار بررسی</option>
+                            <option>در حال طراحی</option>
+                            <option>تکمیل شده</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-        // رمز عبور پنل
-        const CORRECT_PASSWORD = "soloway2025#";
-
-        function checkPassword() {
-            const passInput = document.getElementById("adminPassword").value;
-            const errorDiv = document.getElementById("loginError");
-
-            if (passInput === CORRECT_PASSWORD) {
-                document.getElementById("login-section").style.display = "none";
-                document.getElementById("admin-panel").style.display = "block";
-                loadOrders();
-            } else {
-                errorDiv.innerHTML = "رمز عبور اشتباه است!";
-            }
-        }
-
-        function loadOrders() {
-            const ordersList = document.getElementById("ordersList");
-            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
-
-            if (orders.length === 0) {
-                ordersList.innerHTML = "<p>هنوز سفارشی ثبت نشده است.</p>";
-                return;
-            }
-
-            ordersList.innerHTML = "";
-            orders.forEach((order, index) => {
-                ordersList.innerHTML += `
-                    <div class="order-card">
-                        <span class="order-date">📅 ${order.date}</span>
-                        <h3>👤 نام: ${order.name}</h3>
-                        <p><strong>🛠 نوع پروژه:</strong> ${order.type}</p>
-                        <p><strong>📞 راه ارتباطی:</strong> ${order.contact}</p>
-                        <p><strong>📝 توضیحات:</strong> ${order.description}</p>
-                        <button class="delete-btn" onclick="deleteOrder(${index})">حذف سفارش</button>
-                    </div>
-                `;
-            });
-        }
-
-        function deleteOrder(index) {
-            let orders = JSON.parse(localStorage.getItem("siteOrders")) || [];
-            orders.splice(index, 1);
-            localStorage.setItem("siteOrders", JSON.stringify(orders));
-            loadOrders();
-        }
-    </script>
+        <div class="back-link">
+            <a href="index.html">← بازگشت به صفحه اصلی سایت</a>
+        </div>
+    </div>
 
 </body>
 </html>
