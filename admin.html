@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دیجیتال خاتم | پنل مدیریت</title>
+    <!-- لود کردن فونت وزیرمتن و لاله‌زار -->
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0284c7; /* آبی آسمونی تیره */
+            --primary-color: #0284c7;
             --primary-hover: #0369a1;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --border-color: #e2e8f0;
+            --muted-color: #64748b;
+            --table-header: #f1f5f9;
         }
+
+        [data-theme="dark"] {
+            --primary-color: #38bdf8;
+            --primary-hover: #0ea5e9;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --border-color: #334155;
+            --muted-color: #94a3b8;
+            --table-header: #1e293b;
+        }
+
         body {
-            font-family: Tahoma, sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
+            transition: background 0.3s, color 0.3s;
         }
         .container {
             max-width: 700px;
@@ -35,9 +52,15 @@
             margin-bottom: 20px;
         }
         .logo {
+            font-family: 'Lalezar', cursive;
             color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         .card {
             background: var(--card-bg);
@@ -45,13 +68,16 @@
             border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-bottom: 20px;
+            transition: background 0.3s;
         }
         h2 {
-            font-size: 1.1rem;
+            font-family: 'Lalezar', cursive;
+            font-size: 1.3rem;
             border-right: 4px solid var(--primary-color);
             padding-right: 10px;
             margin-top: 0;
             color: var(--text-color);
+            letter-spacing: 0.5px;
         }
         table {
             width: 100%;
@@ -65,14 +91,28 @@
             font-size: 0.85rem;
         }
         th {
-            background-color: #f1f5f9;
+            background-color: var(--table-header);
         }
         select {
             padding: 5px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
-            font-family: Tahoma, sans-serif;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Vazirmatn', sans-serif;
             font-size: 0.8rem;
+        }
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .theme-toggle:hover {
+            background: var(--border-color);
         }
         .back-link {
             text-align: center;
@@ -82,7 +122,10 @@
             color: var(--primary-color);
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: bold;
+            font-weight: 700;
+        }
+        p {
+            color: var(--muted-color);
         }
     </style>
 </head>
@@ -91,14 +134,15 @@
     <div class="container">
         <div class="header">
             <div class="logo">🔒 پنل مدیریت دیجیتال خاتم</div>
-            <div>
-                <a href="index.html" style="text-decoration: none; color: #64748b; font-size: 0.9rem;">مشاهده سایت</a>
+            <div class="nav-links">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙 حالت شب/روز</button>
+                <a href="index.html" style="text-decoration: none; color: var(--muted-color); font-size: 0.9rem; font-weight: 700;">مشاهده سایت</a>
             </div>
         </div>
 
         <div class="card">
             <h2>مدیریت سفارش‌های ثبت شده</h2>
-            <p style="font-size: 0.85rem; color: #64748b;">در اینجا می‌توانید وضعیت سفارش‌ها را تغییر دهید.</p>
+            <p style="font-size: 0.85rem;">در اینجا می‌توانید وضعیت سفارش‌ها را تغییر دهید.</p>
             
             <table>
                 <tr>
@@ -127,5 +171,18 @@
         </div>
     </div>
 
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // بارگذاری تم ذخیره شده
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </body>
 </html>
