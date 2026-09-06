@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دیجیتال خاتم | ثبت سفارش</title>
+    <title>دیجیتال خاتم | ثبت سفارش مهر و خدمات</title>
     <!-- Tailwind CSS برای استایل‌دهی سریع و مدرن -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -43,7 +43,7 @@
     <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-50 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400">
-                <i class="fa-solid fa-cube ml-2"></i>دیجیتال خاتم
+                <i class="fa-solid fa-stamp ml-2"></i>دیجیتال خاتم
             </h1>
             <div class="flex items-center gap-3">
                 <!-- دکمه دارک/لایت مود -->
@@ -63,7 +63,7 @@
 
         <!-- فرم ثبت سفارش (متصل به Formspree) -->
         <section class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
-            <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">ثبت سفارش جدید</h2>
+            <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">ثبت سفارش مهر و خدمات</h2>
             
             <form action="https://formspree.io/f/xvkornpl" method="POST" onsubmit="handleFormSubmit(event)" class="space-y-5">
                 <div>
@@ -76,8 +76,19 @@
                     <input type="text" name="contact" id="contact" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="مثلاً 09123456789 یا آیدی تلگرام">
                 </div>
 
+                <!-- انتخاب نوع مهر یا خدمت (مربوط به نام سایت) -->
                 <div>
-                    <label class="block text-sm font-medium mb-2">انتخاب پیام‌رسان ترجیحی:</label>
+                    <label class="block text-sm font-medium mb-2">انتخاب نوع سفارش / طرح مهر:</label>
+                    <select name="seal_type" id="seal_type" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
+                        <option value="مهر خاتم سنتی">مهر خاتم سنتی</option>
+                        <option value="مهر لیزری / اتوماتیک">مهر لیزری / اتوماتیک</option>
+                        <option value="مهر ژلاتینی">مهر ژلاتینی</option>
+                        <option value="طرح و سفارش اختصاصی">طرح و سفارش اختصاصی</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">انتخاب پیام‌رسان ترجیحی برای پیگیری:</label>
                     <select name="messenger" id="messenger" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
                         <option value="تلگرام">تلگرام</option>
                         <option value="بله">بله</option>
@@ -87,8 +98,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-2">جزئیات سفارش:</label>
-                    <textarea name="details" id="details" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="توضیحات کامل سفارش خود را بنویسید..."></textarea>
+                    <label class="block text-sm font-medium mb-2">جزئیات و متن سفارش:</label>
+                    <textarea name="details" id="details" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="متن مهر، ابعاد یا توضیحات کامل سفارش خود را بنویسید..."></textarea>
                 </div>
 
                 <!-- دکمه ثبت نهایی سفارش با گرادینت زنده آبی تیره و آبی آسمانی و فونت لاله‌زار -->
@@ -106,11 +117,11 @@
             <div class="space-y-4">
                 <div class="border border-slate-100 dark:border-slate-700 rounded-xl p-4">
                     <h3 class="text-lg font-bold mb-1 text-sky-600 dark:text-sky-400">چطور می‌توانم به سایت اعتماد کنم؟</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">مجموعه دیجیتال خاتم با ارائه خدمات پایدار و پشتیبانی اختصاصی در کنار شماست.</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">مجموعه دیجیتال خاتم با ارائه خدمات باکیفیت و پشتیبانی اختصاصی در کنار شماست.</p>
                 </div>
                 <div class="border border-slate-100 dark:border-slate-700 rounded-xl p-4">
-                    <h3 class="text-lg font-bold mb-1 text-sky-600 dark:text-sky-400">تحویل سفارش‌ها چقدر طول می‌کشد؟</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">معمولاً سفارش‌ها در کوتاه‌ترین زمان ممکن بررسی و از طریق پیام‌رسان انتخابی به شما تحویل داده می‌شوند.</p>
+                    <h3 class="text-lg font-bold mb-1 text-sky-600 dark:text-sky-400">آماده‌سازی و ارسال سفارش‌ها چقدر طول می‌کشد؟</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">معمولاً سفارش‌ها پس از تایید طرح، در کوتاه‌ترین زمان آماده و از طریق روش انتخابی هماهنگ می‌شوند.</p>
                 </div>
             </div>
         </section>
@@ -168,6 +179,7 @@
             const order = {
                 name: document.getElementById('name').value,
                 contact: document.getElementById('contact').value,
+                sealType: document.getElementById('seal_type').value,
                 messenger: document.getElementById('messenger').value,
                 details: document.getElementById('details').value,
                 date: new Date().toLocaleString('fa-IR')
@@ -178,10 +190,10 @@
             localStorage.setItem('digitalkhatam_orders', JSON.stringify(orders));
         }
 
-        // باز کردن پنل مدیریت
+        // باز کردن پنل مدیریت (رمز پیش‌فرض: 1234)
         function openAdminPanel() {
             const password = prompt("لطفاً رمز عبور مدیریت را وارد کنید:");
-            if (password === "1234") { // رمز پیش‌فرض
+            if (password === "1234") { 
                 renderOrders();
                 document.getElementById('adminModal').classList.remove('hidden');
                 document.getElementById('adminModal').classList.add('flex');
@@ -207,7 +219,7 @@
             container.innerHTML = orders.map((o) => `
                 <div class="border border-slate-200 dark:border-slate-700 p-3 rounded-xl space-y-1 bg-slate-50 dark:bg-slate-900">
                     <div class="flex justify-between font-bold text-xs text-sky-600 dark:text-sky-400">
-                        <span>${o.name}</span>
+                        <span>${o.name} (${o.sealType})</span>
                         <span>${o.date}</span>
                     </div>
                     <div class="text-xs"><strong>تماس:</strong> ${o.contact} (${o.messenger})</div>
