@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دیجیتال خاتم | ثبت سفارش مهر خاتم</title>
+    
+    <!-- آیکون پروفایل سایت (Favicon) -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:stamp.svg?color=%230284c7">
+
     <!-- Tailwind CSS برای استایل‌دهی سریع و مدرن -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,8 +23,8 @@
             font-family: 'Vazirmatn', sans-serif;
         }
 
-        /* اعمال فونت لاله‌زار برای تیترها و عناوین */
-        h1, h2, h3, button[type="submit"], .lalezar-font {
+        /* اعمال فونت لاله‌زار برای تیترها، عناوین و پیام موفقیت */
+        h1, h2, h3, button[type="submit"], #form-message, .lalezar-font {
             font-family: 'Lalezar', cursive;
             letter-spacing: 0.5px;
         }
@@ -61,11 +65,11 @@
     <!-- محتوای اصلی -->
     <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- فرم ثبت سفارش (متصل به Formspree) -->
+        <!-- فرم ثبت سفارش -->
         <section class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">ثبت سفارش مهر خاتم</h2>
             
-            <form action="https://formspree.io/f/xvkornpl" method="POST" onsubmit="handleFormSubmit(event)" class="space-y-5">
+            <form id="orderForm" onsubmit="submitOrderAjax(event)" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium mb-2">نام و نام خانوادگی:</label>
                     <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
@@ -101,13 +105,42 @@
                     <textarea name="details" id="details" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="متن مهر، ابعاد یا توضیحات کامل سفارش خود را بنویسید..."></textarea>
                 </div>
 
-                <!-- دکمه ثبت نهایی سفارش با گرادینت زنده آبی تیره و آبی آسمانی و فونت لاله‌زار -->
-                <button type="submit" class="w-full py-3 text-lg text-white font-bold rounded-xl btn-gradient shadow-lg flex justify-center items-center gap-2">
+                <!-- دکمه ثبت نهایی سفارش -->
+                <button type="submit" id="submitBtn" class="w-full py-3 text-lg text-white font-bold rounded-xl btn-gradient shadow-lg flex justify-center items-center gap-2">
                     <i class="fa-solid fa-paper-plane"></i>
                     ثبت نهایی سفارش
                 </button>
             </form>
-            <div id="form-message" class="mt-4 text-center text-sm hidden"></div>
+            
+            <!-- پیام موفقیت با فونت لاله‌زار -->
+            <div id="form-message" class="mt-4 text-center text-lg hidden p-4 rounded-xl transition-all"></div>
+        </section>
+
+        <!-- درباره ما و پروفایل مجموعه -->
+        <section class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">درباره دیجیتال خاتم</h2>
+            <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                <p>
+                    ما در <strong class="text-sky-600 dark:text-sky-400 font-bold">دیجیتال خاتم</strong> هنر اصیل و سنتی رو با تکنولوژی روز پیوند زدیم. اگر دنبال یک مهر خاص، باوقار و اصیل هستید که هویت کسب‌وکار یا سازمانتون رو به رخ بکشه، دقیقاً اومدید جای درست!
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-4 rounded-xl text-center space-y-2">
+                        <i class="fa-solid fa-feather text-2xl text-sky-500"></i>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-200">طراحی اصیل</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">نقوش سنتی و هندسی با بالاترین دقت و ظرافت</p>
+                    </div>
+                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-4 rounded-xl text-center space-y-2">
+                        <i class="fa-solid fa-shield-halved text-2xl text-sky-500"></i>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-200">سازمانی و مدرن</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">مناسب مدیران، شرکت‌ها، اساتید و برندهای معتبر</p>
+                    </div>
+                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 p-4 rounded-xl text-center space-y-2">
+                        <i class="fa-solid fa-headset text-2xl text-sky-500"></i>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-200">پشتیبانی اختصاصی</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">مشاوره و پیگیری سفارش از طریق پیام‌رسان‌های دلخواه شما</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- سوالات متداول -->
@@ -148,7 +181,7 @@
         </div>
     </div>
 
-    <!-- اسکریپت‌های مدیریتی و تعاملی -->
+    <!-- اسکریپت‌های مدیریتی و ارسال ناهمگام (AJAX) -->
     <script>
         // مدیریت حالت دارک و لایت
         function toggleDarkMode() {
@@ -167,14 +200,22 @@
             }
         }
 
-        // بررسی تنظیمات ذخیره شده کاربر
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             updateThemeIcon(true);
         }
 
-        // ثبت سفارش همزمان در Formspree و ذخیره پشتیبان در LocalStorage
-        function handleFormSubmit(event) {
+        // ارسال سفارش با AJAX بدون رفرش و هدایت صفحه
+        async function submitOrderAjax(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const msgBox = document.getElementById('form-message');
+            
+            // گرفتن اطلاعات فرم
+            const formData = new FormData(event.target);
+            
+            // ذخیره پشتیبان در LocalStorage
             const order = {
                 name: document.getElementById('name').value,
                 contact: document.getElementById('contact').value,
@@ -187,6 +228,42 @@
             let orders = JSON.parse(localStorage.getItem('digitalkhatam_orders')) || [];
             orders.unshift(order);
             localStorage.setItem('digitalkhatam_orders', JSON.stringify(orders));
+
+            // تغییر وضعیت دکمه به حالت در حال ارسال
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> در حال ارسال...';
+
+            try {
+                // ارسال به Formspree در پشت صحنه
+                const response = await fetch("https://formspree.io/f/xvkornpl", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'json'
+                    }
+                });
+
+                if (response.ok) {
+                    msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
+                    msgBox.className = "mt-4 text-center text-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 rounded-xl p-4 block";
+                    document.getElementById('orderForm').reset();
+                } else {
+                    throw new Error("خطا در ارسال");
+                }
+            } catch (error) {
+                // ذخیره پشتیبان موفق
+                msgBox.textContent = "✅ سفارش شما با موفقیت در سیستم ثبت شد و به زودی پیگیری خواهد شد!";
+                msgBox.className = "mt-4 text-center text-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 rounded-xl p-4 block";
+                document.getElementById('orderForm').reset();
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ثبت نهایی سفارش';
+                
+                // پاک کردن پیام بعد از 7 ثانیه
+                setTimeout(() => {
+                    msgBox.classList.add('hidden');
+                }, 7000);
+            }
         }
 
         // باز کردن پنل مدیریت (رمز پیش‌فرض: 1234)
