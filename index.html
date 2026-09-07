@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,6 @@
         
         body {
             font-family: 'Vazirmatn', sans-serif;
-            /* پس‌زمینه ثابت گرادینت آبی تیره و آبی آسمانی روشن */
             background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #38bdf8 100%) fixed;
             min-height: 100vh;
         }
@@ -57,6 +56,13 @@
             z-index: 0;
             pointer-events: none;
         }
+
+        /* استایل گزینه فعال در منو با حاشیه ملایم آبی */
+        .nav-link.active {
+            border: 1px solid rgba(56, 189, 248, 0.6);
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #38bdf8 !important;
+        }
     </style>
 </head>
 <body class="text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 relative">
@@ -70,6 +76,7 @@
             <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400">
                 <i class="fa-solid fa-stamp ml-2"></i>دیجیتال خاتم
             </h1>
+            
             <div class="flex items-center gap-3">
                 <!-- دکمه دارک/لایت مود -->
                 <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
@@ -79,7 +86,19 @@
                 <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                     <i class="fa-solid fa-lock ml-1"></i>پنل مدیریت
                 </button>
+                <!-- دکمه همبرگری منو -->
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition md:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- منوی همبرگری آبشاری برای موبایل و تبلت -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
+            <a href="#order-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">ثبت سفارش</a>
+            <a href="#portfolio-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">نمونه کارها</a>
+            <a href="#about-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">درباره ما</a>
+            <a href="#faq-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">سوالات متداول</a>
         </div>
     </header>
 
@@ -87,7 +106,7 @@
     <main class="max-w-4xl mx-auto px-4 py-8 space-y-10 relative z-10">
 
         <!-- فرم ثبت سفارش -->
-        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
+        <section id="order-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">ثبت سفارش مهر خاتم</h2>
             
             <form id="orderForm" onsubmit="submitOrderAjax(event)" class="space-y-5">
@@ -137,8 +156,17 @@
             <div id="form-message" class="mt-4 text-center text-lg hidden p-4 rounded-xl transition-all"></div>
         </section>
 
+        <!-- بخش نمونه کارها (خالی با قابلیت بارگذاری از پنل مدیریت) -->
+        <section id="portfolio-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
+            <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">نمونه کارها</h2>
+            <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- نمونه‌کارها به‌صورت خودکار از پنل مدیریت اینجا قرار می‌گیرند -->
+                <p id="emptyPortfolio" class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری بارگذاری نشده است. (از طریق پنل مدیریت می‌توانید عکس اضافه کنید)</p>
+            </div>
+        </section>
+
         <!-- درباره ما و پروفایل مجموعه -->
-        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
+        <section id="about-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">درباره دیجیتال خاتم</h2>
             <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
                 <p>
@@ -165,7 +193,7 @@
         </section>
 
         <!-- سوالات متداول -->
-        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
+        <section id="faq-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">سوالات متداول</h2>
             <div class="space-y-4">
                 <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50">
@@ -186,24 +214,78 @@
         تمامی حقوق برای سایت دیجیتال خاتم محفوظ است.
     </footer>
 
-    <!-- مودال پنل مدیریت -->
-    <div id="adminModal" class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50 p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-lg p-6 rounded-2xl shadow-xl space-y-4 border border-slate-200 dark:border-slate-800">
+    <!-- مودال پنل مدیریت پیشرفته -->
+    <div id="adminModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50 p-4">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl p-6 rounded-2xl shadow-xl space-y-6 border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
-                <h3 class="text-lg font-bold">پنل مدیریت (سفارش‌های ذخیره شده محلی)</h3>
+                <h3 class="text-lg font-bold">پنل مدیریت پیشرفته دیجیتال خاتم</h3>
                 <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-slate-600">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-            <div id="ordersList" class="max-h-60 overflow-y-auto space-y-3 text-sm">
-                <p class="text-slate-500 text-center py-4">هنوز سفارشی ذخیره نشده است.</p>
+
+            <!-- بخش آپلود عکس نمونه کار جدید -->
+            <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                <h4 class="font-bold text-sm text-sky-600 dark:text-sky-400"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> آپلود نمونه کار جدید</h4>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="file" id="portfolioImageInput" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-600 cursor-pointer">
+                    <button onclick="uploadPortfolioImage()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold transition whitespace-nowrap">افزودن عکس</button>
+                </div>
             </div>
-            <button onclick="clearOrders()" class="w-full py-2 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition">پاک کردن همه سفارش‌ها</button>
+
+            <!-- لیست نمونه کارهای آپلود شده -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-sm">مدیریت نمونه کارها</h4>
+                <div id="adminPortfolioList" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-40 overflow-y-auto p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
+                    <p class="col-span-full text-xs text-slate-400 text-center py-2">هنوز عکسی بارگذاری نشده است.</p>
+                </div>
+            </div>
+
+            <!-- لیست سفارش‌های ثبت شده -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-sm">سفارش‌های ذخیره شده</h4>
+                <div id="ordersList" class="max-h-40 overflow-y-auto space-y-3 text-sm p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
+                    <p class="text-slate-500 text-center py-4">هنوز سفارشی ذخیره نشده است.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button onclick="clearOrders()" class="w-full py-2 bg-red-500 text-white rounded-xl text-sm hover:bg-red-600 transition">پاک کردن همه سفارش‌ها</button>
+                <button onclick="clearPortfolio()" class="w-full py-2 bg-amber-600 text-white rounded-xl text-sm hover:bg-amber-700 transition">پاک کردن همه نمونه‌کارها</button>
+            </div>
         </div>
     </div>
 
-    <!-- اسکریپت‌ها و انیمیشن خطوط سفید و هندسی -->
+    <!-- اسکریپت‌ها و منطق سایت -->
     <script>
+        // مدیریت باز و بسته شدن منوی همبرگری موبایل
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // سیستم تشخیص بخش فعال (Active Link) هنگام اسکرول صفحه
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
         // مدیریت حالت دارک و لایت
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
@@ -224,6 +306,77 @@
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             updateThemeIcon(true);
+        }
+
+        // بارگذاری و نمایش نمونه‌کارها در صفحه اصلی
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolioGrid');
+            const adminList = document.getElementById('adminPortfolioList');
+            const portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
+
+            if (portfolio.length === 0) {
+                grid.innerHTML = '<p id="emptyPortfolio" class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری بارگذاری نشده است. (از طریق پنل مدیریت می‌توانید عکس اضافه کنید)</p>';
+                if(adminList) adminList.innerHTML = '<p class="col-span-full text-xs text-slate-400 text-center py-2">هنوز عکسی بارگذاری نشده است.</p>';
+                return;
+            }
+
+            // نمایش در صفحه اصلی
+            grid.innerHTML = portfolio.map((imgSrc, index) => `
+                <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-800 aspect-square group">
+                    <img src="${imgSrc}" alt="نمونه کار مهر خاتم ${index + 1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+            `).join('');
+
+            // نمایش در پنل مدیریت جهت مدیریت/حذف
+            if(adminList) {
+                adminList.innerHTML = portfolio.map((imgSrc, index) => `
+                    <div class="relative rounded-lg overflow-hidden border border-slate-300 dark:border-slate-600 aspect-square">
+                        <img src="${imgSrc}" class="w-full h-full object-cover">
+                        <button onclick="deletePortfolioItem(${index})" class="absolute top-1 left-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700 transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+        renderPortfolio();
+
+        // آپلود عکس از پنل مدیریت و ذخیره در LocalStorage به صورت Base64
+        function uploadPortfolioImage() {
+            const fileInput = document.getElementById('portfolioImageInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("لطفاً یک عکس انتخاب کنید!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Image = e.target.result;
+                let portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
+                portfolio.unshift(base64Image);
+                localStorage.setItem('digitalkhatam_portfolio', JSON.stringify(portfolio));
+                
+                fileInput.value = '';
+                renderPortfolio();
+                alert("عکس نمونه کار با موفقیت اضافه شد!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function deletePortfolioItem(index) {
+            let portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
+            portfolio.splice(index, 1);
+            localStorage.setItem('digitalkhatam_portfolio', JSON.stringify(portfolio));
+            renderPortfolio();
+        }
+
+        function clearPortfolio() {
+            if (confirm("آیا مطمئن هستید که می‌خواهید همه نمونه‌کارها را پاک کنید؟")) {
+                localStorage.removeItem('digitalkhatam_portfolio');
+                renderPortfolio();
+            }
         }
 
         // اسکریپت انیمیشن نقاط و خطوط هندسی سفید روی پس‌زمینه آبی
@@ -257,7 +410,7 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.75)'; // نقاط سفید شفاف
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
                 ctx.fill();
             }
         }
@@ -288,7 +441,7 @@
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                         ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
                         let alpha = (1 - (distance / 130)) * 0.35;
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; // خطوط ارتباطی سفید و ظریف
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }
@@ -358,6 +511,7 @@
             const password = prompt("لطفاً رمز عبور مدیریت را وارد کنید:");
             if (password === "1234") { 
                 renderOrders();
+                renderPortfolio();
                 document.getElementById('adminModal').classList.remove('hidden');
                 document.getElementById('adminModal').classList.add('flex');
             } else if (password !== null) {
