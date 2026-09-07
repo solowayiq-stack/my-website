@@ -21,6 +21,13 @@
         
         body {
             font-family: 'Vazirmatn', sans-serif;
+            /* پس‌زمینه ثابت گرادینت آبی تیره و آبی آسمانی روشن */
+            background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #38bdf8 100%) fixed;
+            min-height: 100vh;
+        }
+
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #0369a1 60%, #0284c7 100%) fixed;
         }
 
         /* اعمال فونت لاله‌زار برای تیترها، عناوین و پیام موفقیت */
@@ -29,14 +36,14 @@
             letter-spacing: 0.5px;
         }
 
-        /* گرادینت زنده آبی تیره به آبی آسمانی برای دکمه ثبت سفارش */
+        /* گرادینت دکمه ثبت سفارش */
         .btn-gradient {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #38bdf8 100%);
             transition: all 0.3s ease;
         }
         .btn-gradient:hover {
             background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #0ea5e9 100%);
-            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
 
@@ -47,29 +54,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 relative">
+<body class="text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 relative">
 
-    <!-- کانواس انیمیشن خطوط و گره‌های هندسی متحرک -->
+    <!-- کانواس انیمیشن خطوط و گره‌های هندسی سفید و متحرک -->
     <canvas id="geometric-canvas"></canvas>
 
     <!-- هدر سایت -->
-    <header class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300">
+    <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300 border-b border-white/20">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400">
                 <i class="fa-solid fa-stamp ml-2"></i>دیجیتال خاتم
             </h1>
             <div class="flex items-center gap-3">
                 <!-- دکمه دارک/لایت مود -->
-                <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                     <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
                 </button>
                 <!-- دکمه پنل مدیریت -->
-                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-700 px-3 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                     <i class="fa-solid fa-lock ml-1"></i>پنل مدیریت
                 </button>
             </div>
@@ -80,24 +87,24 @@
     <main class="max-w-4xl mx-auto px-4 py-8 space-y-10 relative z-10">
 
         <!-- فرم ثبت سفارش -->
-        <section class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">ثبت سفارش مهر خاتم</h2>
             
             <form id="orderForm" onsubmit="submitOrderAjax(event)" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium mb-2">نام و نام خانوادگی:</label>
-                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
+                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-sky-500 transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">شماره تماس / آیدی پیام‌رسان:</label>
-                    <input type="text" name="contact" id="contact" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="مثلاً 09123456789 یا آیدی تلگرام">
+                    <input type="text" name="contact" id="contact" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-sky-500 transition" placeholder="مثلاً 09123456789 یا آیدی تلگرام">
                 </div>
 
                 <!-- انتخاب مدل‌های تخصصی مهر خاتم -->
                 <div>
                     <label class="block text-sm font-medium mb-2">انتخاب مدل مهر خاتم:</label>
-                    <select name="seal_type" id="seal_type" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
+                    <select name="seal_type" id="seal_type" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-sky-500 transition">
                         <option value="مهر خاتم سنتی">مهر خاتم سنتی</option>
                         <option value="مهر خاتم سازمانی">مهر خاتم سازمانی</option>
                         <option value="مهر خاتم مدرن">مهر خاتم مدرن</option>
@@ -106,7 +113,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">انتخاب پیام‌رسان ترجیحی برای پیگیری:</label>
-                    <select name="messenger" id="messenger" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition">
+                    <select name="messenger" id="messenger" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-sky-500 transition">
                         <option value="تلگرام">تلگرام</option>
                         <option value="بله">بله</option>
                         <option value="ایتا">ایتا</option>
@@ -116,7 +123,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">جزئیات و متن سفارش:</label>
-                    <textarea name="details" id="details" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-sky-500 transition" placeholder="متن مهر، ابعاد یا توضیحات کامل سفارش خود را بنویسید..."></textarea>
+                    <textarea name="details" id="details" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-sky-500 transition" placeholder="متن مهر، ابعاد یا توضیحات کامل سفارش خود را بنویسید..."></textarea>
                 </div>
 
                 <!-- دکمه ثبت نهایی سفارش -->
@@ -131,24 +138,24 @@
         </section>
 
         <!-- درباره ما و پروفایل مجموعه -->
-        <section class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">درباره دیجیتال خاتم</h2>
             <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
                 <p>
                     ما در <strong class="text-sky-600 dark:text-sky-400 font-bold">دیجیتال خاتم</strong> هنر اصیل و سنتی رو با تکنولوژی روز پیوند زدیم. اگر دنبال یک مهر خاص، باوقار و اصیل هستید که هویت کسب‌وکار یا سازمانتون رو به رخ بکشه، دقیقاً اومدید جای درست!
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/80 p-4 rounded-xl text-center space-y-2">
+                    <div class="border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/80 p-4 rounded-xl text-center space-y-2">
                         <i class="fa-solid fa-feather text-2xl text-sky-500"></i>
                         <h3 class="font-bold text-slate-800 dark:text-slate-200">طراحی اصیل</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400">نقوش سنتی و هندسی با بالاترین دقت و ظرافت</p>
                     </div>
-                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/80 p-4 rounded-xl text-center space-y-2">
+                    <div class="border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/80 p-4 rounded-xl text-center space-y-2">
                         <i class="fa-solid fa-shield-halved text-2xl text-sky-500"></i>
                         <h3 class="font-bold text-slate-800 dark:text-slate-200">سازمانی و مدرن</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400">مناسب مدیران، شرکت‌ها، اساتید و برندهای معتبر</p>
                     </div>
-                    <div class="border border-slate-100 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/80 p-4 rounded-xl text-center space-y-2">
+                    <div class="border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/80 p-4 rounded-xl text-center space-y-2">
                         <i class="fa-solid fa-headset text-2xl text-sky-500"></i>
                         <h3 class="font-bold text-slate-800 dark:text-slate-200">پشتیبانی اختصاصی</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400">مشاوره و پیگیری سفارش از طریق پیام‌رسان‌های دلخواه شما</p>
@@ -158,14 +165,14 @@
         </section>
 
         <!-- سوالات متداول -->
-        <section class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+        <section class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">سوالات متداول</h2>
             <div class="space-y-4">
-                <div class="border border-slate-100 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-900/50">
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50">
                     <h3 class="text-lg font-bold mb-1 text-sky-600 dark:text-sky-400">چطور می‌توانم به سایت اعتماد کنم؟</h3>
                     <p class="text-sm text-slate-600 dark:text-slate-400">مجموعه دیجیتال خاتم با ارائه خدمات تخصصی و پشتیبانی اختصاصی در کنار شماست.</p>
                 </div>
-                <div class="border border-slate-100 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-900/50">
+                <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50">
                     <h3 class="text-lg font-bold mb-1 text-sky-600 dark:text-sky-400">آماده‌سازی و ارسال سفارش‌ها چقدر طول می‌کشد؟</h3>
                     <p class="text-sm text-slate-600 dark:text-slate-400">معمولاً سفارش‌ها پس از تایید طرح، در کوتاه‌ترین زمان آماده و از طریق روش انتخابی هماهنگ می‌شوند.</p>
                 </div>
@@ -175,14 +182,14 @@
     </main>
 
     <!-- فوتر -->
-    <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400 relative z-10">
+    <footer class="text-center py-6 text-sm text-white/80 relative z-10">
         تمامی حقوق برای سایت دیجیتال خاتم محفوظ است.
     </footer>
 
     <!-- مودال پنل مدیریت -->
     <div id="adminModal" class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50 p-4">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-lg p-6 rounded-2xl shadow-xl space-y-4">
-            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-3">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-lg p-6 rounded-2xl shadow-xl space-y-4 border border-slate-200 dark:border-slate-800">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
                 <h3 class="text-lg font-bold">پنل مدیریت (سفارش‌های ذخیره شده محلی)</h3>
                 <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-slate-600">
                     <i class="fa-solid fa-xmark text-lg"></i>
@@ -195,7 +202,7 @@
         </div>
     </div>
 
-    <!-- اسکریپت‌های مدیریت، ارسال فرم و انیمیشن هندسی کانواس -->
+    <!-- اسکریپت‌ها و انیمیشن خطوط سفید و هندسی -->
     <script>
         // مدیریت حالت دارک و لایت
         function toggleDarkMode() {
@@ -219,7 +226,7 @@
             updateThemeIcon(true);
         }
 
-        // اسکریپت انیمیشن خطوط و گره‌های هندسی (مشابه سبک درخواستی)
+        // اسکریپت انیمیشن نقاط و خطوط هندسی سفید روی پس‌زمینه آبی
         const canvas = document.getElementById('geometric-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -236,9 +243,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.size = Math.random() * 2.5 + 1.5;
+                this.vx = (Math.random() - 0.5) * 0.7;
+                this.vy = (Math.random() - 0.5) * 0.7;
+                this.size = Math.random() * 2 + 1.5;
             }
             update() {
                 this.x += this.vx;
@@ -250,15 +257,14 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                const isDark = document.documentElement.classList.contains('dark');
-                ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(2, 132, 199, 0.35)';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.75)'; // نقاط سفید شفاف
                 ctx.fill();
             }
         }
 
         function initParticles() {
             particlesArray = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 18000;
+            let numberOfParticles = (canvas.width * canvas.height) / 16000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particlesArray.push(new Particle());
             }
@@ -277,13 +283,12 @@
                     const dy = particlesArray[i].y - particlesArray[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 120) {
+                    if (distance < 130) {
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                         ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                        const isDark = document.documentElement.classList.contains('dark');
-                        let alpha = (1 - (distance / 120)) * 0.25;
-                        ctx.strokeStyle = isDark ? `rgba(56, 189, 248, ${alpha})` : `rgba(2, 132, 199, ${alpha})`;
+                        let alpha = (1 - (distance / 130)) * 0.35;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; // خطوط ارتباطی سفید و ظریف
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }
@@ -329,14 +334,14 @@
 
                 if (response.ok) {
                     msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
-                    msgBox.className = "mt-4 text-center text-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 rounded-xl p-4 block";
+                    msgBox.className = "mt-4 text-center text-lg bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl p-4 block";
                     document.getElementById('orderForm').reset();
                 } else {
                     throw new Error("خطا در ارسال");
                 }
             } catch (error) {
                 msgBox.textContent = "✅ سفارش شما با موفقیت در سیستم ثبت شد و به زودی پیگیری خواهد شد!";
-                msgBox.className = "mt-4 text-center text-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 rounded-xl p-4 block";
+                msgBox.className = "mt-4 text-center text-lg bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl p-4 block";
                 document.getElementById('orderForm').reset();
             } finally {
                 submitBtn.disabled = false;
@@ -375,7 +380,7 @@
             }
 
             container.innerHTML = orders.map((o) => `
-                <div class="border border-slate-200 dark:border-slate-700 p-3 rounded-xl space-y-1 bg-slate-50 dark:bg-slate-900">
+                <div class="border border-slate-200 dark:border-slate-700 p-3 rounded-xl space-y-1 bg-slate-50 dark:bg-slate-800">
                     <div class="flex justify-between font-bold text-xs text-sky-600 dark:text-sky-400">
                         <span>${o.name} (${o.sealType})</span>
                         <span>${o.date}</span>
