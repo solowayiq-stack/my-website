@@ -72,28 +72,39 @@
 
     <!-- هدر سایت -->
     <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300 border-b border-white/20">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400">
-                <i class="fa-solid fa-stamp ml-2"></i>دیجیتال خاتم
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            
+            <!-- لوگو و نام سایت -->
+            <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2">
+                <i class="fa-solid fa-stamp"></i>دیجیتال خاتم
             </h1>
             
-            <div class="flex items-center gap-3">
+            <!-- منوی دسکتاپ (در حالت دسکتاپ و حالت دسکتاپ سایت در موبایل مستقیماً نمایش داده می‌شود) -->
+            <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm">
+                <a href="#order-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">ثبت سفارش</a>
+                <a href="#portfolio-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">نمونه کارها</a>
+                <a href="#about-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">درباره ما</a>
+                <a href="#faq-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">سوالات متداول</a>
+            </nav>
+
+            <!-- دکمه‌های کنترل (دارک مود، پنل مدیریت و منوی همبرگری موبایل) -->
+            <div class="flex items-center gap-2">
                 <!-- دکمه دارک/لایت مود -->
-                <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                     <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
                 </button>
                 <!-- دکمه پنل مدیریت -->
-                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium">
                     <i class="fa-solid fa-lock ml-1"></i>پنل مدیریت
                 </button>
-                <!-- دکمه همبرگری منو -->
+                <!-- دکمه همبرگری منو (فقط در موبایل و حالت پرتره دیده می‌شود) -->
                 <button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition md:hidden">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
 
-        <!-- منوی همبرگری آبشاری برای موبایل و تبلت -->
+        <!-- منوی همبرگری آبشاری (فقط برای موبایل در حالت عادی) -->
         <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
             <a href="#order-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">ثبت سفارش</a>
             <a href="#portfolio-section" onclick="toggleMobileMenu()" class="nav-link block px-4 py-2.5 rounded-xl text-sm font-medium transition text-slate-600 dark:text-slate-300">نمونه کارها</a>
@@ -156,11 +167,10 @@
             <div id="form-message" class="mt-4 text-center text-lg hidden p-4 rounded-xl transition-all"></div>
         </section>
 
-        <!-- بخش نمونه کارها (خالی با قابلیت بارگذاری از پنل مدیریت) -->
+        <!-- بخش نمونه کارها -->
         <section id="portfolio-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400">نمونه کارها</h2>
             <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <!-- نمونه‌کارها به‌صورت خودکار از پنل مدیریت اینجا قرار می‌گیرند -->
                 <p id="emptyPortfolio" class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری بارگذاری نشده است. (از طریق پنل مدیریت می‌توانید عکس اضافه کنید)</p>
             </div>
         </section>
@@ -272,7 +282,6 @@
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
                 if (window.scrollY >= (sectionTop - 150)) {
                     current = section.getAttribute('id');
                 }
@@ -320,14 +329,12 @@
                 return;
             }
 
-            // نمایش در صفحه اصلی
             grid.innerHTML = portfolio.map((imgSrc, index) => `
                 <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-800 aspect-square group">
                     <img src="${imgSrc}" alt="نمونه کار مهر خاتم ${index + 1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                 </div>
             `).join('');
 
-            // نمایش در پنل مدیریت جهت مدیریت/حذف
             if(adminList) {
                 adminList.innerHTML = portfolio.map((imgSrc, index) => `
                     <div class="relative rounded-lg overflow-hidden border border-slate-300 dark:border-slate-600 aspect-square">
@@ -341,7 +348,6 @@
         }
         renderPortfolio();
 
-        // آپلود عکس از پنل مدیریت و ذخیره در LocalStorage به صورت Base64
         function uploadPortfolioImage() {
             const fileInput = document.getElementById('portfolioImageInput');
             const file = fileInput.files[0];
