@@ -3,234 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دیجیتال خاتم | زئوس گرافیک</title>
+    <title>دیجیتال خاتم | ثبت سفارش و نمونه کارها</title>
     <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #555555;
+            --border-color: #d1d5db;
+            --primary-color: #0077cc;
+            --primary-hover: #005fa3;
+            --header-bg: #ffffff;
+            --input-bg: #ffffff;
+            --faq-bg: #f9fafb;
+        }
+
+        [data-theme="green"] {
+            --bg-color: #1a2e1a;
+            --card-bg: #243d24;
+            --text-main: #ffffff;
+            --text-secondary: #e2f0d9;
+            --border-color: #3b5d3b;
+            --primary-color: #4CAF50;
+            --primary-hover: #3d8b40;
+            --header-bg: #1e331e;
+            --input-bg: #2d4d2d;
+            --faq-bg: #1e331e;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        :root {
-            --bg-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
-            --box-bg: rgba(255, 255, 255, 0.08);
-            --box-border: rgba(255, 255, 255, 0.15);
-            --text-color: #ffffff;
-            --desc-color: #d0e1fd;
-            --badge-bg: rgba(0, 0, 0, 0.2);
-            --particle-color: rgba(255, 255, 255, 0.6);
-            --line-color: rgba(255, 255, 255, 0.25);
-        }
-        [data-theme="green"] {
-            --bg-gradient: linear-gradient(135deg, #85bb65, #2d5a27);
-            --box-bg: rgba(255, 255, 255, 0.1);
-            --box-border: rgba(255, 255, 255, 0.2);
-            --text-color: #ffffff;
-            --desc-color: #e2f0d9;
-            --badge-bg: rgba(0, 0, 0, 0.25);
-            --particle-color: rgba(255, 255, 255, 0.6);
-            --line-color: rgba(255, 255, 255, 0.35);
-        }
-        body {
             font-family: Tahoma, Arial, sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            transition: background 0.5s ease;
-        }
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-        /* دکمه تغییر تم */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-            background: var(--box-bg);
-            border: 1px solid var(--box-border);
-            color: var(--text-color);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .container {
-            position: relative;
-            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px;
+            padding: 15px;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        .logo-box {
-            background: var(--box-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--box-border);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            max-width: 400px;
+
+        /* هدر و منوی همبرگری */
+        header {
             width: 100%;
-            animation: fadeIn 1.2s ease-in-out;
-        }
-        .logo-box img {
-            width: 140px;
-            height: 140px;
-            object-fit: contain;
+            max-width: 500px;
+            background-color: var(--header-bg);
+            padding: 12px 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             margin-bottom: 20px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            transition: background-color 0.4s ease;
+            position: relative;
         }
-        h1 {
-            font-size: 26px;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        p {
-            font-size: 15px;
-            color: var(--desc-color);
+
+        .admin-btn {
+            background-color: #1f2937;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 16px;
+            padding: 5px 8px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* دکمه منوی همبرگری */
+        .hamburger-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger-btn span {
+            width: 22px;
+            height: 2px;
+            background-color: var(--text-main);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* منوی کشویی موبایلی */
+        .mobile-menu {
+            position: absolute;
+            top: 65px;
+            right: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out;
+            z-index: 100;
+        }
+
+        .mobile-menu.active {
+            max-height: 200px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .logo-text h2 {
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+
+        .logo-text span {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* بدنه‌ها و بخش‌ها */
+        .section-box {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--card-bg);
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 20px;
+            transition: background-color 0.4s ease;
         }
-        .badge {
-            display: inline-block;
-            background: var(--badge-bg);
-            padding: 8px 16px;
-            border-radius: 30px;
+
+        .section-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-right: 4px solid var(--primary-color);
+            padding-right: 10px;
+        }
+
+        /* فرم */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             font-size: 13px;
-            letter-spacing: 0.5px;
-            border: 1px solid var(--box-border);
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            outline: none;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* بخش نمونه کارها گالری ساده */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .portfolio-item {
+            background-color: var(--faq-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 5px;
+        }
+
+        /* درباره ما */
+        .about-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* سوالات متداول */
+        .faq-item {
+            background-color: var(--faq-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .faq-question {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .faq-answer {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
         }
     </style>
 </head>
 <body data-theme="blue">
 
-    <!-- دکمه تعویض تم -->
-    <button class="theme-toggle" id="themeToggleBtn">🎨 تغییر تم (سبز/آبی)</button>
+    <!-- هدر سایت و منوی همبرگری -->
+    <header>
+        <button class="hamburger-btn" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <!-- بوم انیمیشن ذرات -->
-    <canvas id="particle-canvas"></canvas>
+        <div class="header-left">
+            <button class="admin-btn">🔒 پنل</button>
+            <button class="theme-toggle-btn" id="themeToggle">🌙</button>
+        </div>
 
-    <div class="container">
-        <div class="logo-box">
-            <img src="logo.png" alt="Zeus Graphic Logo">
-            <h1>زئوس گرافیک</h1>
-            <p>مرکز تخصصی طراحی گرافیک و خدمات دیجیتال</p>
-            <div class="badge">digitalkhatam.ir</div>
+        <div class="logo-area">
+            <div class="logo-text">
+                <h2>Digital Khatam</h2>
+                <span>دیجیتال خاتم</span>
+            </div>
+            <div class="logo-icon">خاتم</div>
+        </div>
+
+        <!-- منوی کشویی موبایل -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <a href="#orderForm">ثبت سفارش</a>
+            <a href="#portfolio">نمونه کارها</a>
+            <a href="#aboutUs">درباره ما</a>
+            <a href="#faq">سوالات متداول</a>
+        </nav>
+    </header>
+
+    <!-- فرم ثبت سفارش -->
+    <div class="section-box" id="orderForm">
+        <h2 class="section-title">ثبت سفارش مهر خاتم</h2>
+        <form>
+            <div class="form-group">
+                <label>نام و نام خانوادگی:</label>
+                <input type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>شماره تماس / آیدی پیام‌رسان:</label>
+                <input type="text" placeholder="مثلاً 09123456789">
+            </div>
+            <div class="form-group">
+                <label>انتخاب مدل مهر:</label>
+                <select>
+                    <option>مهر خاتم سنتی</option>
+                    <option>مهر خاتم مدرن</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>جزئیات سفارش:</label>
+                <textarea placeholder="متن و توضیحات سفارش..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">ثبت نهایی سفارش</button>
+        </form>
+    </div>
+
+    <!-- بخش نمونه کارها -->
+    <div class="section-box" id="portfolio">
+        <h2 class="section-title">نمونه کارهای طراحی</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">مهر خاتم نمونه ۱</div>
+            <div class="portfolio-item">مهر خاتم نمونه ۲</div>
+            <div class="portfolio-item">تایپوگرافی مجتهدی</div>
+            <div class="portfolio-item">طراحی لوگوتایپ</div>
+        </div>
+    </div>
+
+    <!-- درباره دیجیتال خاتم -->
+    <div class="section-box" id="aboutUs">
+        <h2 class="section-title">درباره دیجیتال خاتم</h2>
+        <p class="about-text">
+            مجموعه دیجیتال خاتم تخصصی‌ترین مرکز طراحی و ساخت انواع مَهرهای خاتم سنتی و مدرن با بالاترین کیفیت و دقت است. هدف ما زنده نگه داشتن هنر اصیل ایرانی با تلفیق تکنولوژی‌های روز دیجیتال است.
+        </p>
+    </div>
+
+    <!-- سوالات متداول -->
+    <div class="section-box" id="faq">
+        <h2 class="section-title">سوالات متداول</h2>
+        <div class="faq-item">
+            <div class="faq-question">چقدر طول میکشه تا مهر آماده بشه؟</div>
+            <div class="faq-answer">معمولاً بین ۲ تا ۴ روز کاری زمان می‌برد.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">چطور طرح رو قبل از ساخت ببینیم؟</div>
+            <div class="faq-answer">پیش‌طرح نهایی از طریق پیام‌رسان برای شما ارسال می‌شود.</div>
         </div>
     </div>
 
     <script>
-        // مدیریت دکمه تغییر تم
-        const toggleBtn = document.getElementById('themeToggleBtn');
+        // تغییر تم (آبی/سبز)
+        const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        toggleBtn.addEventListener('click', () => {
+        themeToggle.addEventListener('click', () => {
             if (body.getAttribute('data-theme') === 'blue') {
                 body.setAttribute('data-theme', 'green');
-                toggleBtn.textContent = '🎨 تم آبی (کلاسیک)';
+                themeToggle.textContent = '☀️';
             } else {
                 body.setAttribute('data-theme', 'blue');
-                toggleBtn.textContent = '🎨 تغییر تم (سبز/آبی)';
+                themeToggle.textContent = '🌙';
             }
         });
 
-        // اسکریپت ساخت ذرات و خطوط متحرک
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
+        // منوی همبرگری
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-        let particlesArray;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 1.2;
-                this.vy = (Math.random() - 0.5) * 1.2;
-                this.size = Math.random() * 3 + 1.5;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 15000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function connectParticles() {
-            let maxDistance = 120;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a + 1; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < maxDistance) {
-                        let opacity = 1 - (distance / maxDistance);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.35})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connectParticles();
-            requestAnimationFrame(animate);
-        }
-        animate();
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
     </script>
 </body>
 </html>
