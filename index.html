@@ -197,11 +197,11 @@
             <div id="form-message" class="mt-4 text-center text-lg hidden p-4 rounded-xl transition-all"></div>
         </section>
 
-        <!-- بخش نمونه کارها -->
+        <!-- بخش نمونه کارها (خوانش خودکار از فایل portfolio.json) -->
         <section id="portfolio-section" class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-white/30 dark:border-slate-800">
             <h2 class="text-xl font-bold mb-6 border-r-4 border-sky-500 pr-3 text-sky-600 dark:text-sky-400 section-heading-border">نمونه کارها</h2>
             <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <p id="emptyPortfolio" class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری بارگذاری نشده است. (از طریق پنل مدیریت می‌توانید عکس اضافه کنید)</p>
+                <p class="col-span-full text-slate-500 text-center py-6 text-sm">در حال بارگذاری نمونه‌کارها...</p>
             </div>
         </section>
 
@@ -264,34 +264,22 @@
                 </button>
             </div>
 
-            <!-- بخش آپلود عکس نمونه کار جدید -->
-            <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
-                <h4 class="font-bold text-sm text-sky-600 dark:text-sky-400 accent-text"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> آپلود نمونه کار جدید</h4>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="file" id="portfolioImageInput" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-sky-500 file:text-white hover:file:opacity-90 cursor-pointer portfolio-file-btn">
-                    <button onclick="uploadPortfolioImage()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold transition whitespace-nowrap">افزودن عکس</button>
-                </div>
-            </div>
-
-            <!-- لیست نمونه کارهای آپلود شده -->
-            <div class="space-y-2">
-                <h4 class="font-bold text-sm">مدیریت نمونه کارها</h4>
-                <div id="adminPortfolioList" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-40 overflow-y-auto p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
-                    <p class="col-span-full text-xs text-slate-400 text-center py-2">هنوز عکسی بارگذاری نشده است.</p>
-                </div>
+            <!-- راهنمای مدیریت نمونه‌کارها با فایل portfolio.json -->
+            <div class="bg-sky-50 dark:bg-sky-950/40 p-4 rounded-xl border border-sky-200 dark:border-sky-800 space-y-2 text-xs text-sky-800 dark:text-sky-200 leading-relaxed">
+                <p class="font-bold"><i class="fa-solid fa-circle-info ml-1"></i> راهنمای اضافه کردن نمونه‌کارها:</p>
+                <p>عکس‌های خود را در کنار فایل index.html در گیت‌هاب آپلود کنید و نام آن‌ها را در فایل <code>portfolio.json</code> وارد نمایید تا به صورت خودکار در سایت نمایش داده شوند.</p>
             </div>
 
             <!-- لیست سفارش‌های ثبت شده -->
             <div class="space-y-2">
                 <h4 class="font-bold text-sm">سفارش‌های ذخیره شده</h4>
-                <div id="ordersList" class="max-h-40 overflow-y-auto space-y-3 text-sm p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
+                <div id="ordersList" class="max-h-60 overflow-y-auto space-y-3 text-sm p-2 border border-slate-200 dark:border-slate-700 rounded-xl">
                     <p class="text-slate-500 text-center py-4">هنوز سفارشی ذخیره نشده است.</p>
                 </div>
             </div>
 
             <div class="flex gap-3 pt-2">
                 <button onclick="clearOrders()" class="w-full py-2 bg-red-500 text-white rounded-xl text-sm hover:bg-red-600 transition">پاک کردن همه سفارش‌ها</button>
-                <button onclick="clearPortfolio()" class="w-full py-2 bg-amber-600 text-white rounded-xl text-sm hover:bg-amber-700 transition">پاک کردن همه نمونه‌کارها</button>
             </div>
         </div>
     </div>
@@ -341,7 +329,6 @@
             const headings = document.querySelectorAll('.section-heading-border');
             const accentTexts = document.querySelectorAll('.accent-text');
             const accentIcons = document.querySelectorAll('.accent-icon');
-            const fileBtn = document.querySelector('.portfolio-file-btn');
 
             if (theme === 'green') {
                 if(logoTitle) logoTitle.className = "text-2xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2.5";
@@ -357,9 +344,6 @@
                     i.classList.remove('text-sky-500');
                     i.classList.add('text-emerald-500');
                 });
-                if(fileBtn) {
-                    fileBtn.style.setProperty('--tw-file-bg', '#166534');
-                }
             } else {
                 if(logoTitle) logoTitle.className = "text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2.5";
                 headings.forEach(h => {
@@ -404,73 +388,34 @@
             updateThemeIcon(true);
         }
 
-        // بارگذاری و نمایش نمونه‌کارها در صفحه اصلی
+        // بارگذاری و نمایش نمونه‌کارها از فایل portfolio.json
         function renderPortfolio() {
             const grid = document.getElementById('portfolioGrid');
-            const adminList = document.getElementById('adminPortfolioList');
-            const portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
 
-            if (portfolio.length === 0) {
-                grid.innerHTML = '<p id="emptyPortfolio" class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری بارگذاری نشده است. (از طریق پنل مدیریت می‌توانید عکس اضافه کنید)</p>';
-                if(adminList) adminList.innerHTML = '<p class="col-span-full text-xs text-slate-400 text-center py-2">هنوز عکسی بارگذاری نشده است.</p>';
-                return;
-            }
+            fetch('portfolio.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('فایل portfolio.json پیدا نشد');
+                    }
+                    return response.json();
+                })
+                .then(images => {
+                    if (!images || images.length === 0) {
+                        grid.innerHTML = '<p class="col-span-full text-slate-500 text-center py-6 text-sm">هنوز نمونه کاری در فایل portfolio.json ثبت نشده است.</p>';
+                        return;
+                    }
 
-            grid.innerHTML = portfolio.map((imgSrc, index) => `
-                <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-800 aspect-square group">
-                    <img src="${imgSrc}" alt="نمونه کار مهر خاتم ${index + 1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-            `).join('');
-
-            if(adminList) {
-                adminList.innerHTML = portfolio.map((imgSrc, index) => `
-                    <div class="relative rounded-lg overflow-hidden border border-slate-300 dark:border-slate-600 aspect-square">
-                        <img src="${imgSrc}" class="w-full h-full object-cover">
-                        <button onclick="deletePortfolioItem(${index})" class="absolute top-1 left-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700 transition">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                `).join('');
-            }
+                    grid.innerHTML = images.map((imgSrc, index) => `
+                        <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-800 aspect-square group">
+                            <img src="${imgSrc}" alt="نمونه کار مهر خاتم ${index + 1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                    `).join('');
+                })
+                .catch(error => {
+                    grid.innerHTML = '<p class="col-span-full text-slate-500 text-center py-6 text-sm">خطا در بارگذاری نمونه‌کارها. لطفاً فایل portfolio.json را در پوشه پروژه قرار دهید.</p>';
+                });
         }
         renderPortfolio();
-
-        function uploadPortfolioImage() {
-            const fileInput = document.getElementById('portfolioImageInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert("لطفاً یک عکس انتخاب کنید!");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64Image = e.target.result;
-                let portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
-                portfolio.unshift(base64Image);
-                localStorage.setItem('digitalkhatam_portfolio', JSON.stringify(portfolio));
-                
-                fileInput.value = '';
-                renderPortfolio();
-                alert("عکس نمونه کار با موفقیت اضافه شد!");
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function deletePortfolioItem(index) {
-            let portfolio = JSON.parse(localStorage.getItem('digitalkhatam_portfolio')) || [];
-            portfolio.splice(index, 1);
-            localStorage.setItem('digitalkhatam_portfolio', JSON.stringify(portfolio));
-            renderPortfolio();
-        }
-
-        function clearPortfolio() {
-            if (confirm("آیا مطمئن هستید که می‌خواهید همه نمونه‌کارها را پاک کنید؟")) {
-                localStorage.removeItem('digitalkhatam_portfolio');
-                renderPortfolio();
-            }
-        }
 
         // اسکریپت انیمیشن نقاط و خطوط هندسی سفید روی پس‌زمینه
         const canvas = document.getElementById('geometric-canvas');
@@ -579,7 +524,7 @@
                 });
 
                 if (response.ok) {
-                    msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
+                    msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
                     msgBox.className = "mt-4 text-center text-lg bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl p-4 block";
                     document.getElementById('orderForm').reset();
                 } else {
@@ -604,7 +549,6 @@
             const password = prompt("لطفاً رمز عبور مدیریت را وارد کنید:");
             if (password === "1234") { 
                 renderOrders();
-                renderPortfolio();
                 document.getElementById('adminModal').classList.remove('hidden');
                 document.getElementById('adminModal').classList.add('flex');
             } else if (password !== null) {
