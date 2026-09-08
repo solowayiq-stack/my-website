@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دیجیتال خاتم | ثبت سفارش مهر خاتم</title>
     
-    <!-- آیکون پروفایل سایت (Favicon) با لوگوی جدید -->
-    <link rel="icon" type="image/png" href="1000015182_2.png">
+    <!-- آیکون پروفایل سایت (Favicon) -->
+    <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Tailwind CSS برای استایل‌دهی سریع و مدرن -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -93,23 +93,10 @@
     <canvas id="geometric-canvas"></canvas>
 
     <!-- هدر سایت -->
-    <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300 border-b border-white/20">
+    <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300 border-b border-white/25">
         <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
             
-            <!-- لوگو و نام سایت (با تصویر جدید) -->
-            <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2" id="logo-title">
-                <img src="1000015182_2.png" alt="لوگو دیجیتال خاتم" class="w-7 h-7 object-contain rounded-md shadow-sm">دیجیتال خاتم
-            </h1>
-            
-            <!-- منوی دسکتاپ -->
-            <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm">
-                <a href="#order-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">ثبت سفارش</a>
-                <a href="#portfolio-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">نمونه کارها</a>
-                <a href="#about-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">درباره ما</a>
-                <a href="#faq-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">سوالات متداول</a>
-            </nav>
-
-            <!-- دکمه‌های کنترل (انتخاب تم رنگی، دارک مود، پنل مدیریت و منوی همبرگری موبایل) -->
+            <!-- دکمه‌های کنترل سمت چپ (انتخاب تم رنگی، دارک مود، پنل مدیریت و منوی همبرگری موبایل) -->
             <div class="flex items-center gap-2">
                 <!-- دکمه تغییر تم رنگی (آبی / سبز) -->
                 <button onclick="toggleColorTheme()" title="تغییر تم رنگی" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
@@ -120,14 +107,31 @@
                     <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
                 </button>
                 <!-- دکمه پنل مدیریت -->
-                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium">
+                <button onclick="openAdminPanel()" class="text-sm bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition font-medium hidden sm:inline-flex items-center">
                     <i class="fa-solid fa-lock ml-1"></i>پنل مدیریت
+                </button>
+                <button onclick="openAdminPanel()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition sm:hidden" title="پنل مدیریت">
+                    <i class="fa-solid fa-lock"></i>
                 </button>
                 <!-- دکمه همبرگری منو (فقط در موبایل) -->
                 <button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition md:hidden">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
+            
+            <!-- منوی دسکتاپ -->
+            <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm">
+                <a href="#order-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">ثبت سفارش</a>
+                <a href="#portfolio-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">نمونه کارها</a>
+                <a href="#about-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">درباره ما</a>
+                <a href="#faq-section" class="nav-link px-3 py-1.5 rounded-lg font-medium transition text-slate-600 dark:text-slate-300">سوالات متداول</a>
+            </nav>
+
+            <!-- لوگو و نام سایت در سمت راست -->
+            <h1 class="text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2.5" id="logo-title">
+                دیجیتال خاتم
+                <img src="logo.png" alt="لوگو دیجیتال خاتم" class="w-8 h-8 object-contain rounded-lg shadow-sm bg-slate-100 dark:bg-slate-800 p-0.5">
+            </h1>
         </div>
 
         <!-- منوی همبرگری آبشاری (فقط برای موبایل) -->
@@ -340,7 +344,7 @@
             const fileBtn = document.querySelector('.portfolio-file-btn');
 
             if (theme === 'green') {
-                if(logoTitle) logoTitle.className = "text-2xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2";
+                if(logoTitle) logoTitle.className = "text-2xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2.5";
                 headings.forEach(h => {
                     h.classList.remove('border-sky-500', 'text-sky-600', 'dark:text-sky-400');
                     h.classList.add('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
@@ -357,7 +361,7 @@
                     fileBtn.style.setProperty('--tw-file-bg', '#166534');
                 }
             } else {
-                if(logoTitle) logoTitle.className = "text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2";
+                if(logoTitle) logoTitle.className = "text-2xl font-bold text-sky-600 dark:text-sky-400 flex items-center gap-2.5";
                 headings.forEach(h => {
                     h.classList.remove('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
                     h.classList.add('border-sky-500', 'text-sky-600', 'dark:text-sky-400');
@@ -575,7 +579,7 @@
                 });
 
                 if (response.ok) {
-                    msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
+                    msgBox.textContent = "🎉 سفارش شما با موفقیت ثبت ثبت شد! به زودی برای هماهنگی با شما ارتباط می‌گیریم.";
                     msgBox.className = "mt-4 text-center text-lg bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl p-4 block";
                     document.getElementById('orderForm').reset();
                 } else {
